@@ -4,9 +4,9 @@
 
 // You can assume that there will be at most one pair of numbers summing up to the target sum.
 
-// Solution 1
+// Solution 1 O(n^2) time | O(1) space
 
-function twoNumberSum(array, targetSum) {
+function twoNumberSum1(array, targetSum) {
   for (let i = 0; i < array.length; i++) {
 		const firstNum = array[i];
 		for (let j = i + 1; j < array.length; j++) {
@@ -16,3 +16,20 @@ function twoNumberSum(array, targetSum) {
 	}
 	return [];
 }
+
+// Solution 2 O(n) time | O(n) space
+
+function twoNumberSum2(array, targetSum) {
+  const nums ={};
+	for (let i = 0; i < array.length; i++) {
+		const eachValue = array[i];
+		const potentionalMatch = targetSum - eachValue;
+		if (potentionalMatch in nums) {
+			return [eachValue, potentionalMatch];
+		} else {
+			nums[eachValue] = true;
+		}
+	}
+	return [];
+}
+
