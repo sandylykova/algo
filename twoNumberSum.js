@@ -4,6 +4,8 @@
 
 // You can assume that there will be at most one pair of numbers summing up to the target sum.
 
+// twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10) => [11, -1]
+
 // Solution 1 O(n^2) time | O(1) space
 
 function twoNumberSum1(array, targetSum) {
@@ -20,7 +22,7 @@ function twoNumberSum1(array, targetSum) {
 // Solution 2 O(n) time | O(n) space
 
 function twoNumberSum2(array, targetSum) {
-  const nums ={};
+  const nums = {};
 	for (let i = 0; i < array.length; i++) {
 		const eachValue = array[i];
 		const potentionalMatch = targetSum - eachValue;
@@ -33,3 +35,21 @@ function twoNumberSum2(array, targetSum) {
 	return [];
 }
 
+// Solution 3 O(nlog(n)) time | O(1) space
+
+function twoNumberSum3(array, targetSum) {
+  array.sort((a, b) => a - b);
+	let leftPointer = 0;
+	let rightPointer = array.length - 1;
+	while (leftPointer < rightPointer) {
+		const currentSum = array[leftPointer] + array[rightPointer];
+		if (currentSum === targetSum) {
+			return [array[leftPointer], array[rightPointer]];
+		} else if (currentSum < targetSum) {
+			leftPointer++;
+		} else if (currentSum > targetSum) {
+			rightPointer--;
+		}
+	}
+	return [];
+}
