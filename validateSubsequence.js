@@ -1,3 +1,5 @@
+// O(n) time | O(1) space
+
 function isValidSubsequence(array, sequence) {
 	if (sequence.length > array.length) return false;
 	let counter = 0;
