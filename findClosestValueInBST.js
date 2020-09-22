@@ -1,3 +1,15 @@
+// Write a function that takes in a Binary Search Tree (BST) and a target integer value and returns the closest value to that target value contained in the BST. You can assume that there will only be one closest value.
+
+// tree =      10
+//        /          \
+//       5            15
+//     /  \         /    \
+//    2    5       13    22
+//   /               \
+//  1                14
+// target = 12;
+// findClosestValueInBst1(tree, target) => 13
+
 // This is the class of the input tree.
 class BST {
   constructor(value) {
