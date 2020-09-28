@@ -23,3 +23,16 @@ class Node {
 		return array;
   }
 }
+
+let a = new Node('a');
+const b = new Node('b');
+const c = new Node('c');
+const d = new Node('d');
+const f = new Node('f');
+const e = new Node('e');
+const i = new Node('i');
+const j = new Node('j');
+a.children.push(b, c, d);
+b.children.push(e, f);
+f.children.push(i, j);
+a.depthFirstSearch([]);
