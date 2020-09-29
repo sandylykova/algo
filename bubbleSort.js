@@ -43,3 +43,16 @@ function bubbleSort2(array) {
 	}
 	return array;
 }
+
+// Solution 3 with 2 for loops
+
+function bubbleSort3(array) {
+  for (let i = array.length - 1; i >= 0; i--) {
+		for (let j = 0; j <= i - 1; j++) {
+			if (array[j] > array[j + 1]) {
+				[array[j], array[j + 1]] = [array[j + 1], array[j]];
+			}
+		}
+	}
+		return array;
+}
