@@ -28,7 +28,7 @@ function selectionSort2(array) {
 		noSwaps = true;
 		for ( let j = i; j < array.length; j++) {
 			if (min > array[j]) {
-        min = array[j]
+        min = array[j];
 				minIndex = j;
 				noSwaps = false;
 			}
@@ -41,4 +41,21 @@ function selectionSort2(array) {
 		if (noSwaps) break;
 	}
 	return array;
+}
+
+// Solution 3
+
+function selectionSort3(arr) {
+  for (let i = 0; i< arr.length; i++) {
+    let lowest = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[lowest] > arr[j]) {
+        lowest = j;
+      }
+    }
+    if (lowest !== i) {
+      [arr[lowest], arr[i]] = [arr[i], arr[lowest]];
+    }
+  }
+  return arr;
 }
