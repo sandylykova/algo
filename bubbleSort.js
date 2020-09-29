@@ -4,7 +4,7 @@
 // Average: O(n^2) time | O(1) space
 // Worst: O(n^2) time | O(1) space
 
-function bubbleSort(array) {
+function bubbleSort1(array) {
   let sorted = false;
 	let counter = 0;
 	while (!sorted) {
@@ -24,4 +24,22 @@ function swap(i, j, array) {
 	let temp = array[i];
 	array[i] = array[j];
 	array[j] = temp;
+}
+
+// Solution 2 without helper function
+
+function bubbleSort2(array) {
+  let sorted = false;
+	let counter = 0;
+	while (!sorted) {
+		sorted = true;
+		for (let i = 0; i < array.length - 1 - counter; i++) {
+			if (array[i] > array[i+1]) {
+				[array[i], array[i+1]] = [array[i+1], array[i]];
+				sorted = false;
+			}
+		}
+		counter++;
+	}
+	return array;
 }
