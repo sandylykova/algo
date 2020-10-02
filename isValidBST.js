@@ -8,8 +8,8 @@
 
 var isValidBST = function(root, min = -Infinity, max=Infinity) {
   if (!root) return true;
-   if (min >= root.val || max <= root.val) return false;
-   let leftIsValid = isValidBST(root.left, min, root.val);
-   let rightIsValid = isValidBST(root.right, root.val, max);
-   return leftIsValid && rightIsValid;
+  if (min >= root.val || max <= root.val) return false;
+  let leftIsValid = isValidBST(root.left, min, root.val);
+  let rightIsValid = isValidBST(root.right, root.val, max);
+  return leftIsValid && rightIsValid;
 };
