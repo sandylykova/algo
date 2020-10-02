@@ -26,4 +26,4 @@ var removeDuplicates2 = function(S) {
       }
   }
   return stack.join('');
-}
+};
