@@ -4,7 +4,7 @@
 
 // Return the final string after all such duplicate removals have been made.  It is guaranteed the answer is unique.
 
-var removeDuplicates = function(S) {
+var removeDuplicates1 = function(S) {
   let arr = S.split('');
   for (let i = 0; i < arr.length; i++) {
       if (arr[i] === arr[i + 1]) {
@@ -15,3 +15,15 @@ var removeDuplicates = function(S) {
   }
   return arr.join('');
 };
+
+
+var removeDuplicates2 = function(S) {
+  let stack = [S[0]];
+  for (let i = 1; i < S.length; i++) {
+      if (S[i] === stack[stack.length - 1]) stack.pop();
+      else {
+          stack.push(S[i]);
+      }
+  }
+  return stack.join('');
+}
