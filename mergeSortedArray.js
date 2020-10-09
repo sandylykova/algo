@@ -41,3 +41,31 @@ var merge2 = function(nums1, m, nums2, n) {
   }
    return nums1;
 };
+
+// Solution 3 with two pointers and starting from the beginning
+// O(n + m) time | O(n) space
+
+var merge3 = function(nums1, m, nums2, n) {
+  let p1 = 0;
+  let p2 = 0;
+  let copyNums1 = nums1.slice();
+  for (let i = 0; i < nums1.length; i++) {
+      if (p1 < m && p2 < n) {
+          if (copyNums1[p1] <= nums2[p2]) {
+              nums1[i] = copyNums1[p1];
+              p1++;
+          } else if (copyNums1[p1] > nums2[p2]){
+              nums1[i] = nums2[p2];
+              p2++;
+          }
+      } else if (p1 >= m) {
+          nums1[i] = nums2[p2];
+          p1++;
+          p2++;
+      } else if (p2 >= n) {
+          nums1[i] = copyNums1[p1];
+          p1++;
+      }
+  }
+  return nums1;
+};
