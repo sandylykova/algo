@@ -10,7 +10,7 @@
 
 var moveZeroes1 = function(nums) {
     let numOfZeros = 0;
-    for (num of nums) {
+    for (let num of nums) {
         if (num === 0) numOfZeros++;
     }
     let numsWithoutZero = nums.filter(num => num !== 0);
