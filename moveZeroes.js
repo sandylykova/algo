@@ -5,7 +5,7 @@
 // Input: [0,1,0,3,12]
 // Output: [1,3,12,0,0]
 
-// Solution 2 using two pointers
+// Solution 1 - naive
 // O(n) time | O(n) space
 
 var moveZeroes1 = function(nums) {
