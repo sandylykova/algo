@@ -35,3 +35,29 @@ var islandPerimeter = function(grid) {
  }
  return perimeter;
 };
+
+// Solution 1 O(mn) where m is the number of rows of the grid and n is the number of columns of the grid) time | O(1) space
+
+var islandPerimeter = function(grid) {
+  let rows = grid.length;
+  let cols = grid[0].length;
+
+  let result = 0;
+  for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+          if (grid[r][c] == 1) {
+              result += 4;
+
+              if (r > 0 && grid[r-1][c] == 1) {
+                  // remove 2 sides (one from each land cell) which will be touching between these two cells.
+                  result -= 2;
+              }
+
+              if (c > 0 && grid[r][c-1] == 1) {
+                  result -= 2;
+              }
+          }
+      }
+  }
+  return result;
+};
