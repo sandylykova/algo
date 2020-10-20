@@ -26,3 +26,24 @@ var mergeTwoLists1 = function(l1, l2) {
 };
 
 // Solution 2 iterative O(n + m) time | O(1) space
+
+var mergeTwoLists = function(l1, l2) {
+    let dummyHead = new ListNode(0);
+    let curNode = dummyHead;
+    while (l1 !== null && l2 !== null) {
+        if (l1.val < l2.val) {
+            curNode.next = l1;
+            l1 = l1.next;
+        } else {
+            curNode.next = l2;
+            l2 = l2.next;
+        }
+        curNode = curNode.next;
+    }
+    if (l1 !== null) {
+        curNode.next = l1;
+    } else if (l2 !== null) {
+        curNode.next = l2;
+    }
+    return dummyHead.next;
+};
