@@ -39,3 +39,25 @@ function removeKthNodeFromEnd(head, k) {
 	}
 	second.next = second.next.next;
 }
+
+// Solution 2 with edge cases
+
+var removeNthFromEnd = function(head, n) {
+  let first = head;
+  let second = head;
+  let counter = 0;
+  let returned = second;
+  while (n > counter) {
+      first = first.next;
+      counter++;
+  }
+  if (first === null) {
+      return second.next;
+  }
+  while (first.next) {
+      first = first.next;
+      second = second.next;
+  }
+  second.next = second.next.next;
+  return returned;
+};
