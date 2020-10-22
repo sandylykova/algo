@@ -8,6 +8,8 @@
 
 // removeDuplicates("deeedbbcccbdaa", 3) => "aa";
 
+// Solution 1 O(n^2/k) time | O(n);
+
 var removeDuplicates = function(s, k) {
   let arr = s.split('');
   for (let i = 0; i < arr.length; i++) {
@@ -24,4 +26,49 @@ var removeDuplicates = function(s, k) {
       }
   }
   return arr.join('');
+};
+
+// Solution 2 O(n^2) time | O(n);
+
+var removeDuplicates = function(s, k) {
+    let stack = [1];
+    let copy = s.split('');
+    for (let i = 1; i < copy.length; i++) {
+        if (copy[i - 1] !== copy[i]) {
+            stack.push(1);
+        } else {
+            stack[stack.length - 1]++;
+            if (stack[stack.length - 1] === k) {
+                stack.pop();
+                copy.splice(i - k + 1, k);
+                i -= k;
+            }
+        }
+    }
+    return copy.join('');
+};
+
+// Solution 3 O(n) time | O(n) space
+
+var removeDuplicates = function(s, k) {
+  const stack = [];
+
+  for(let char of s) {
+      if(stack.length && stack[stack.length-1][0] === char) {
+          stack[stack.length-1][1] += 1;
+          if(stack[stack.length-1][1] === k) {
+              stack.pop();
+          }
+      } else {
+          stack.push([char, 1]);
+      }
+  }
+
+  let res = '';
+
+  for(let [char, count] of stack) {
+      res += char.repeat(count);
+  }
+
+  return res;
 };
