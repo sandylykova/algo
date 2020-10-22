@@ -20,6 +20,7 @@
 
 var removeKdigits = function(num, k) {
   if (num.length === k) return '0';
+  
   const stack = [];
   let removed = 0;
   for(let n of num) {
