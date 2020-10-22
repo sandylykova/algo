@@ -38,6 +38,6 @@ class Queue {
     let dequeued = this.first;
     this.first = this.first.next;
     this.size--;
-    return dequeued;
+    return dequeued.val;
   }
 }
