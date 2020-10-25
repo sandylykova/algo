@@ -25,4 +25,21 @@ function moveElementToEnd(array, toMove) {
 
 // Solution 2 O(n) time | O(1) space
 
+function moveElementToEnd(array, toMove) {
+  let p1 = 0;
+	let p2 = array.length - 1;
+	while (p1 < p2) {
+		while (p1 < p2 && array[p2] === toMove) p2--;
+		if (array[p1] === toMove) {
+			let temp = array[p1];
+			array[p1] = array[p2];
+			array[p2] = temp;
+			p1++;
+			p2--;
+		} else {
+			p1++;
+		}
+	}
+	return array;
+}
 
