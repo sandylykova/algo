@@ -53,4 +53,53 @@ class BinarySearchTree {
     if (!found) return false;
     return cur;
   }
+  breadthFirstSearch() {
+    let allValues = [];
+    let queue = [this.root];
+    let dequeued;
+    while (queue.length > 0) {
+      dequeued = queue.shift();
+      allValues.push(dequeued.value);
+      if (dequeued.left) {
+        queue.push(dequeued.left);
+      }
+      if (dequeued.right) {
+        queue.push(dequeued.right);
+      }
+    }
+    return allValues;
+  }
+  DFSPreOrder() {
+    let data = [];
+    let cur = this.root;
+    function preOrderHelper(node) {
+      data.push(cur.value);
+      if (node.left) preOrderHelper(node.left);
+      if (node.right) preOrderHelper(node.right);
+    }
+    preOrderHelper(cur);
+    return data;
+  }
+  DFSPostOrder() {
+    let data = [];
+    let cur = this.root;
+    function postOrderHelper(node) {
+      if (node.left) postOrderHelper(node.left);
+      if (node.right) postOrderHelper(node.right);
+      data.push(node.value);
+    }
+    postOrderHelper(cur);
+    return data;
+  }
+  DFSInOrder() {
+    let data = [];
+    let cur = this.root;
+    function inOrderHelper(node) {
+      if (node.left) inOrderHelper(node.left);
+      data.push(node.value);
+      if (node.right) inOrderHelper(node.right);
+    }
+    inOrderHelper(cur);
+    return data;
+  }
 }
