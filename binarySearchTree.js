@@ -38,7 +38,7 @@ class BinarySearchTree {
   find(val) {
     if (this.root === null) return false;
     let cur = this.root;
-    let found = false
+    let found = false;
     while (cur && !found) {
       if (val < cur.value) {
         if (cur.left === null) return false;
