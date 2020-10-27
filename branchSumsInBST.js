@@ -55,3 +55,25 @@ function calculateBranchSums(node, runningSum, sums) {
 	calculateBranchSums(node.left, newRunningSum, sums);
 	calculateBranchSums(node.right, newRunningSum, sums);
 }
+
+// Solution 3
+
+function branchSums(root) {
+	let arr = [];
+	function traverse(node, sum) {
+		if (!node) return;
+		sum += node.value;
+		if (!node.left && !node.right) {
+			arr.push(sum);
+			return;
+		}
+		if (node.left) {
+			traverse(node.left, sum);
+		}
+		if (node.right) {
+			traverse(node.right, sum);
+		}
+	}
+	traverse(root, 0);
+	return arr;
+}
