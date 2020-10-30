@@ -19,3 +19,32 @@ var threeSumSmaller = function(nums, target) {
   }
   return count;
 };
+
+// Solution 2 with two pointers O(n^2) time | O(1) space
+
+var threeSumSmaller = function(nums, target) {
+  let count = 0;
+  if (nums.length < 3) return count;
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < nums.length - 2; i++) {
+      count += twoSumSmaller(i, target - nums[i], nums);
+  }
+  return count;
+};
+
+const twoSumSmaller = (i, target, nums) => {
+  let count = 0;
+  let left = i + 1;
+  let right = nums.length - 1;
+  while (left < right) {
+      let sum = nums[left] + nums[right];
+      if (sum < target) {
+          count += right - left;
+          left++;
+      } else {
+         right--;
+      }
+  }
+  return count;
+};
+
