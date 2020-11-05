@@ -3,6 +3,12 @@
 // Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
 // Output: 6
 
+// Complexity Analysis
+
+// Time complexity : O(NM). Running leetcode84 on each row takes M (length of each row) time. This is done N times for O(NM).
+
+// Space complexity : O(M). We allocate an array the size of the the number of columns to store our widths at each row.
+
 var largestRectangleArea = function(heights) {
   heights.push(0);
   let  max = 0;
