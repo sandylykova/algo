@@ -54,3 +54,19 @@ var longestConsecutive = function(nums) {
   }
   return longest;
 };
+
+// Solution 3 O(nlog(n)) time | O(n) space
+
+var frequencySort = function(s) {
+  if (s.length === 0) return s;
+  let map = new Map();
+  for (let char of s) {
+      map.set(char, map.get(char) + 1 || 1);
+  }
+  let returnedValue = '';
+  let sortedCharactersArray = Array.from(map.keys()).sort((a, b) => map.get(b) - map.get(a));
+  for (let char of sortedCharactersArray) {
+      returnedValue += char.repeat(map.get(char));
+  }
+  return returnedValue;
+};
