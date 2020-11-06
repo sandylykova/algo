@@ -44,12 +44,11 @@ var longestConsecutive = function(nums) {
   for (let i = 0; i < nums.length; i++) {
       let potentialLongest = 1;
       let curNum = nums[i];
-      if (set.has(nums[i] - 1)) continue;
-      else {
-          while (set.has(curNum + 1)) {
-              curNum += 1;
-              potentialLongest++;
-          }
+      if (!set.has(nums[i] - 1)) {
+        while (set.has(curNum + 1)) {
+            curNum += 1;
+            potentialLongest += 1;
+        }
       }
       longest = Math.max(longest, potentialLongest);
   }
