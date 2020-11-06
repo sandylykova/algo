@@ -24,4 +24,5 @@ var permute = function(nums, set = [], answers = []) {
     permute(newNums, set, answers);
     set.pop();
   }
+  return answers;
 };
