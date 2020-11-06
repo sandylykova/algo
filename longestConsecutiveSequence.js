@@ -29,3 +29,29 @@ var longestConsecutive = function(nums) {
   }
   return Math.max(count, curCount);
 };
+
+// Solution 2 O(n) time | O(n) space
+
+var longestConsecutive = function(nums) {
+  if (nums.length == 0) {
+      return 0;
+  }
+  let set = new Set();
+  for (let num of nums) {
+      set.add(num);
+  }
+  let longest = 1;
+  for (let i = 0; i < nums.length; i++) {
+      let potentialLongest = 1;
+      let curNum = nums[i];
+      if (set.has(nums[i] - 1)) continue;
+      else {
+          while (set.has(curNum + 1)) {
+              curNum += 1;
+              potentialLongest++;
+          }
+      }
+      longest = Math.max(longest, potentialLongest);
+  }
+  return longest;
+};
