@@ -8,6 +8,7 @@
 // Solution 1 O(n) time | O(n) space
 
 var firstMissingPositive = function(nums) {
+  if (nums === null || nums.length === 0) return 1;
   let set = new Set();
   let maxPossibleNumber = nums.length + 1;
   for (let num of nums) {
@@ -21,6 +22,7 @@ var firstMissingPositive = function(nums) {
 // Solution 2 O(n) time | O(1) space
 
 var firstMissingPositive = function(nums) {
+  if (nums === null || nums.length === 0) return 1;
   let hasOne = false;
   let maxPossibleNumber = nums.length + 1;
   for (let num of nums) {
