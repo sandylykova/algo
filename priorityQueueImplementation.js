@@ -1,9 +1,10 @@
-class MaxBinaryTree {
+class PriorityQueue {
   constructor() {
     this.values = [];
   }
-  insert(value) {
-    this.values.push(value);
+  enqueue(val, priority) {
+    let newNode = new Node(val, priority);
+    this.values.push(newNode);
     this.bubbleUp();
   }
   bubbleUp() {
@@ -12,13 +13,13 @@ class MaxBinaryTree {
     while (index > 0) {
       let parentIndex = Math.floor((index - 1) / 2);
       let parent = this.values[parentIndex];
-      if (element <= parent) break;
+      if (element.priority <= parent.priority) break;
       this.values[parentIndex] = element;
       this.values[index] = parent;
       index = parentIndex;
     }
   }
-  extractMax() {
+  dequeue() {
     let max = this.values[0];
     let end = this.values.pop();
     if (this.values.length > 0) {
@@ -38,13 +39,13 @@ class MaxBinaryTree {
       let swap = null;
       if (leftChildIdx < length) {
         leftChild = this.values[leftChildIdx];
-        if (leftChild > element) {
+        if (leftChild.priority > element.priority) {
           swap = leftChildIdx;
         }
       }
       if (rightChildIdx < length) {
         rightChild = this.values[rightChildIdx];
-        if ((swap === null && rightChild > element) || (swap !== null && rightChild > leftChildIdx)) {
+        if ((swap === null && rightChild.priority > element.priority) || (swap !== null && rightChild.priority > leftChildIdx.priority)) {
           swap = rightChildIdx;
         }
       }
@@ -53,5 +54,12 @@ class MaxBinaryTree {
       this.values[swap] = element;
       idx = swap;
     }
+  }
+}
+
+class Node {
+  constructor(val, priority) {
+    this.val = val;
+    this.priority = priority;
   }
 }
