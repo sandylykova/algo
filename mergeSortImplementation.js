@@ -1,5 +1,6 @@
 // Implementation of merge sort
 // O(nlogn) time | O (n) space
+// O(logn) decompositions and O(n) comparisons per decomposition
 
 function merge(arr1, arr2) {
   let results = [];
