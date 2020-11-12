@@ -18,15 +18,13 @@ var killProcess = function(pid, ppid, kill) {
   ppid.forEach((v,i)=> adj.get(v).push(pid[i]));
 
   const res = [];
-  let found = false;
-  function dfs(root, f){
+  function dfs(root){
     if(!adj.has(root)) return;
-    if(adj.has(root)) f = true;
-    if(f) res.push(root);
-    for(let a of adj.get(root)){
-      dfs(a, f);
+    if(adj.has(root)) res.push(root);
+    for(let a of adj.get(root)) {
+      dfs(a);
     }
   }
-  dfs(kill, found);
+  dfs(kill);
   return res;
 };
