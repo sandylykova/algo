@@ -1,3 +1,9 @@
+// Quick sort implementation
+
+// Best/average case = O(nlogn) time
+// Worst = O(n^2) time if data was already sorted
+// O(logn) space complexity
+
 function swap(arr, j, i) {
   let temp = arr[j];
   arr[j] = arr[i];
