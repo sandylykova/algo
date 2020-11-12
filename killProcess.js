@@ -14,15 +14,15 @@
 
 var killProcess = function(pid, ppid, kill) {
   const adj = new Map([[0,[]]]);
-  pid.forEach((v)=> adj.set(v,[]));
-  ppid.forEach((v,i)=> adj.get(v).push(pid[i]));
+  pid.forEach((v) => adj.set(v,[]));
+  ppid.forEach((v,i) => adj.get(v).push(pid[i]));
 
   const res = [];
   function dfs(root){
     if(!adj.has(root)) return;
     if(adj.has(root)) res.push(root);
-    for(let a of adj.get(root)) {
-      dfs(a);
+    for(let child of adj.get(root)) {
+      dfs(child);
     }
   }
   dfs(kill);
