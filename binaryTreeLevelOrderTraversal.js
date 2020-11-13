@@ -17,8 +17,8 @@
 // Solution 1 O(n) time | O(n) space
 
 var levelOrder = function(root) {
-  if (root === null) return [];
   let results = [];
+  if (root === null) return results;
   function traverse(node, level) {
       if (results[level] === undefined) {
           results[level] = [node.val];
