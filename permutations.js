@@ -33,13 +33,13 @@ function getPermutations(array) {
 	let result = [];
 	let len = array.length;
 	if (len === 0) return result;
-	function traverse(array, curr) {
-		if (array.length === 0 && curr.length === len) {
-			result.push(curr.slice());
+	function traverse(array, currPerm) {
+		if (array.length === 0 && currPerm.length === len) {
+			result.push(currPerm);
 		} else {
 			for (let i = 0; i < array.length; i++) {
 			let newArray = array.slice(0, i).concat(array.slice(i + 1));
-			let newPermutation = curr.concat(array[i]);
+			let newPermutation = currPerm.concat(array[i]);
 			traverse(newArray, newPermutation);
 			}
 		}
