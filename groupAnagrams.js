@@ -2,7 +2,7 @@
 
 // Your function should return a list of anagram groups in no particular order.
 
-// Solution 1 O(n^2) time | O(n) space
+// Solution 1
 
 function groupAnagrams(words) {
 	let result = [];
