@@ -7,6 +7,8 @@
 // Solution 1 with sliding window and 2 pointers
 // O(n) time | O(min(m, n)) space
 
+// Solution 1 O(n) time | O(n) space
+
 var lengthOfLongestSubstring = function(s) {
     let maxLength = 0;
     if (s.length === 0) return maxLength;
@@ -46,3 +48,27 @@ var lengthOfLongestSubstring = function(s) {
   }
   return maxLength;
 };
+
+// Solution 3
+// returns longest substring itself
+
+function longestSubstringWithoutDuplication(string) {
+    let set = new Set();
+      let fast = 0;
+      let slow = 0;
+      let longest = '';
+      while (fast < string.length) {
+          if (!set.has(string[fast])) {
+              set.add(string[fast]);
+              fast++;
+              let curr = string.slice(slow, fast);
+              if (curr.length > longest.length) {
+                  longest = curr;
+              }
+          } else {
+              set.delete(string[slow]);
+              slow++;
+          }
+      }
+      return longest;
+  }
