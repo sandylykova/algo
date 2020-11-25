@@ -49,3 +49,22 @@ var searchMatrix = function(matrix, target) {
   }
   return false;
 };
+
+// Solution 2 O(n + m) time | O(1) space - where n is the length of the matrix's rows and m is the length of the matrix's columns
+
+function searchInSortedMatrix(matrix, target) {
+    let startRow = 0;
+    let startCol = matrix[0].length - 1;
+    let currPositionVal;
+    while (startRow < matrix.length && startCol >= 0) {
+        currPositionVal = matrix[startRow][startCol];
+        if (currPositionVal < target) {
+            startRow++;
+        } else if (currPositionVal > target) {
+            startCol--;
+        } else {
+            return [startRow, startCol];
+        }
+    }
+    return [-1, -1];
+  }
