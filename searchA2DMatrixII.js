@@ -52,6 +52,25 @@ var searchMatrix = function(matrix, target) {
 
 // Solution 2 O(n + m) time | O(1) space - where n is the length of the matrix's rows and m is the length of the matrix's columns
 
+var searchMatrix = function(matrix, target) {
+    if (!matrix || matrix.length === 0) return false;
+    let currRow = 0;
+    let currCol = matrix[0].length - 1;
+    while (currRow < matrix.length && currCol >= 0) {
+        let currValue = matrix[currRow][currCol];
+        if (currValue > target) {
+            currCol--;
+        } else if (currValue < target) {
+            currRow++;
+        } else {
+            return true;
+        }
+    }
+    return false;
+};
+
+// Solution 2.1 O(n + m) time | O(1) space - where n is the length of the matrix's rows and m is the length of the matrix's columns
+
 function searchInSortedMatrix(matrix, target) {
     let startRow = 0;
     let startCol = matrix[0].length - 1;
