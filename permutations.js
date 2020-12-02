@@ -27,7 +27,7 @@ var permute = function(nums, set = [], answers = []) {
   return answers;
 };
 
-// Solution 2
+// Solution 2 O(n! * n^2) time | O(n! * n) space
 
 function getPermutations(array) {
 	let result = [];
@@ -45,5 +45,28 @@ function getPermutations(array) {
 		}
 	}
 	traverse(array, []);
+	return result;
+}
+
+// Solution 3 O(n! * n) time | O(n! * n) space
+
+function swap(i, j, array) {
+	[array[i], array[j]] = [array[j], array[i]];
+}
+
+function getPermutations(array) {
+	let result = [];
+	function traverse(i, array) {
+		if (i === array.length - 1) {
+			result.push(array.slice());
+		} else {
+			for (let j = i; j < array.length; j++) {
+				swap(i, j, array);
+				traverse(i + 1, array);
+				swap(i, j, array);
+			}
+		}
+	}
+	traverse(0, array);
 	return result;
 }
