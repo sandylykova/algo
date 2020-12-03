@@ -20,3 +20,29 @@ function fourNumberSum(array, targetSum) {
 }
 
 // Solution 2 O(n^2) time | O(n^2) space
+
+function fourNumberSum(array, targetSum) {
+	if (array.length < 4) return [];
+ 	let pairs = {};
+	let ans = [];
+	for (let i = 1; i < array.length - 1; i++) {
+		for (let j = i + 1; j < array.length; j++) {
+			let currSum = array[i] + array[j];
+			let diff = targetSum - currSum;
+			if (pairs[diff]) {
+				for (let pair of pairs[diff]) {
+					ans.push(pair.concat([array[i], array[j]]));
+				}
+			}
+		}
+		for (let k = 0; k < i; k++) {
+			let sum = array[i] + array[k];
+			if (!pairs[sum]) {
+				pairs[sum] = [[array[i], array[k]]];
+			} else {
+				pairs[sum].push([array[i], array[k]]);
+			}
+		}
+	}
+	return ans;
+}
