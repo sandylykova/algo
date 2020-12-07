@@ -28,7 +28,7 @@ var isPalindrome = function(head) {
 
 // Solution 2 O(n) time | O(1) space
 
-var isPalindrome = function(head) {
+function isPalindrome(head) {
   if(head == null || head.next == null) return true;
       let slow = head;
       let fast = head;
@@ -44,9 +44,9 @@ var isPalindrome = function(head) {
           slow = slow.next;
       }
       return true;
-};
+}
 
-var reverseList = function(head) {
+function reverseList(head) {
       var pre = null;
       var next = null;
       while(head != null) {
@@ -56,5 +56,5 @@ var reverseList = function(head) {
           head = next;
       }
       return pre;
-};
+}
 
