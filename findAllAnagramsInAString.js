@@ -33,3 +33,35 @@ var findAnagrams = function(s, p) {
     return ans;
 };
 
+// Solution 2
+
+var findAnagrams = function(s, p) {
+  let result = [];
+  if (!s || s.length < p.length) return result;
+  let frequencyCounter = {};
+  let unique = 0;
+  for (let i = 0; i < p.length; i++) {
+      if (frequencyCounter[p[i]] === undefined) unique++;
+      frequencyCounter[p[i]] = frequencyCounter[p[i]] + 1 || 1;
+  }
+  let end = 0;
+  let start = 0;
+  while (end < s.length) {
+      let curr = s[end];
+      if (frequencyCounter[curr] !== undefined) {
+          frequencyCounter[curr] = frequencyCounter[curr] - 1;
+          if (frequencyCounter[curr] === 0) unique--;
+      }
+      end++;
+      while (unique === 0) {
+          let currFromStart = s[start];
+          if (frequencyCounter[currFromStart] !== undefined) {
+              frequencyCounter[currFromStart] = frequencyCounter[currFromStart] + 1;
+              if (frequencyCounter[currFromStart] > 0) unique++;
+          }
+          if (end - start === p.length) result.push(start);
+          start++;
+      }
+  }
+  return result;
+};
