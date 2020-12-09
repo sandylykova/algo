@@ -26,3 +26,30 @@ class TreeInfo {
 		this.height = height;
 	}
 }
+
+// Solution 2
+
+class BinaryTree {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function binaryTreeDiameter(tree) {
+  let diameter = -1;
+	function traverse(node) {
+		if (!node) return 0;
+		let left = traverse(node.left);
+		let right = traverse(node.right);
+		diameter = Math.max(diameter, left + right);
+		return Math.max(left, right) + 1;
+	}
+	traverse(tree);
+  return diameter;
+}
+
+// Solution 3
+
+

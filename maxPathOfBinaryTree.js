@@ -1,3 +1,9 @@
+// 124. Binary Tree Maximum Path Sum
+
+// Given a non-empty binary tree, find the maximum path sum.
+
+// For this problem, a path is defined as any node sequence from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+
 // Solution 1 O(n) time | O(log(n)) space - because of call stack
 
 function maxPathSum(tree) {
@@ -13,3 +19,7 @@ function maxPathSum(tree) {
 	traverse(tree);
 	return maxGain;
 }
+
+// Solution 2 O(n) time | O(log(n)) space - because of call stack
+
+
