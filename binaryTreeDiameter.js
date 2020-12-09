@@ -52,4 +52,28 @@ function binaryTreeDiameter(tree) {
 
 // Solution 3
 
+class BinaryTree {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function binaryTreeDiameter(tree) {
+	if (!tree) return 0;
+	let leftHeight = heightOfBinaryTree(tree.left);
+	let rightHeight = heightOfBinaryTree(tree.right);
+	let leftDiameter = binaryTreeDiameter(tree.left);
+	let rightDiameter = binaryTreeDiameter(tree.right);
+	let currMaxDiameter = Math.max(leftHeight + rightHeight + 2, leftDiameter, rightDiameter);
+	return currMaxDiameter;
+}
+
+function heightOfBinaryTree(node) {
+	if (!node) return -1;
+	let leftHeight = heightOfBinaryTree(node.left);
+	let rightHeight = heightOfBinaryTree(node.right);
+	return Math.max(leftHeight, rightHeight) + 1;
+}
 
