@@ -35,7 +35,7 @@ function findThreeLargestNumbers2(array) {
     let min = Math.min(helperArr[0], helperArr[1], helperArr[2]);
     if (array[i] > min) {
       let indexOfMin = helperArr.indexOf(min);
-      helperArr.splice(indexOfMin, 1, array[i]);
+      helperArr[indexOfMin] = array[i];
     }
 	}
 	return helperArr.sort((a, b) => a - b);
