@@ -2,7 +2,7 @@
 
 // Given an m x n matrix. If an element is 0, set its entire row and column to 0. Do it in-place.
 
-// Solution 1 O(n^2) time | O(n + m) - where n is the length of rows, m is the length of cols
+// Solution 1 O(n^2) time | O(n + m) - where n is the number of rows, m is the number of cols
 
 var setZeroes = function(matrix) {
   let rows = new Array(matrix.length).fill(false);
