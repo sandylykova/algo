@@ -10,7 +10,7 @@
 // 5=2+1+1+1
 // 5=1+1+1+1+1
 
-// Solution 1
+// Solution 1 O(nm), where n is the number of coins, m is amount | O(m) space
 
 var change = function(amount, coins) {
   let ways = new Array(amount + 1).fill(0);
