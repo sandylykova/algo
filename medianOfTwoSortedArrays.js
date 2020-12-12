@@ -7,7 +7,7 @@
 // Solution 1 O(log(min(n, m))) time | O(1) space
 
 var findMedianSortedArrays = function(nums1, nums2) {
-  if (nums1.length > nums2.length) return findMedianSortedArrays(nums2, nums1)
+  if (nums1.length > nums2.length) return findMedianSortedArrays(nums2, nums1);
   let len1 = nums1.length;
   let len2 = nums2.length;
   let start = 0;
