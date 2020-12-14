@@ -8,9 +8,9 @@
 
 // Solution 1
 
-var findKthLargest = function(nums, k) {
+function findKthLargest(nums, k) {
   return quickSelect(nums, 0, nums.length - 1, k);
-};
+}
 
 function quickSelect(nums, start, end, k) {
   let pivotIndex = partition(nums, start, end);
