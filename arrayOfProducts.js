@@ -39,3 +39,20 @@ function arrayOfProducts(array) {
 	}
 	return products;
 }
+
+// Solution 3 O(n) time | O(n) space
+
+function arrayOfProducts(array) {
+	let products = new Array(array.length).fill(1);
+	let leftRunningSum = 1;
+	for (let i = 0; i < array.length; i++) {
+		products[i] *= leftRunningSum;
+		leftRunningSum *= array[i];
+	}
+	let rightRunningSum = 1;
+	for (let i = array.length - 1; i >= 0; i--) {
+		products[i] *= rightRunningSum;
+		rightRunningSum *= array[i];
+	}
+	return products;
+}
