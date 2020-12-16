@@ -43,14 +43,15 @@ function arrayOfProducts(array) {
 // Solution 3 O(n) time | O(n) space
 
 function arrayOfProducts(array) {
-	let products = new Array(array.length).fill(1);
+	let len = array.length;
+	let products = new Array(len).fill(1);
 	let leftRunningSum = 1;
-	for (let i = 0; i < array.length; i++) {
+	for (let i = 0; i < len; i++) {
 		products[i] *= leftRunningSum;
 		leftRunningSum *= array[i];
 	}
 	let rightRunningSum = 1;
-	for (let i = array.length - 1; i >= 0; i--) {
+	for (let i = len - 1; i >= 0; i--) {
 		products[i] *= rightRunningSum;
 		rightRunningSum *= array[i];
 	}
