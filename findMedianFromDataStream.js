@@ -18,7 +18,7 @@
 // addNum(3)
 // findMedian() -> 2
 
-// Solution 1
+// Solution 1 O(n) time | O(n) space
 
 var MedianFinder = function() {
   this.data = [];
