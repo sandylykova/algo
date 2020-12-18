@@ -21,3 +21,15 @@ var isPalindrome = function(x) {
   }
   return true;
 };
+
+// Solution 2 O(log10(n)). We divided the input by 10 for every iteration | O(1) space
+
+var isPalindrome = function(x) {
+  if (x < 0 || (x % 10 === 0 && x !== 0)) return false;
+  let reversed = 0;
+  while (x > reversed) {
+      reversed = (reversed * 10) + (x % 10);
+      x = Math.floor(x / 10);
+  }
+  return x === reversed || x === Math.floor(reversed / 10);
+};
