@@ -10,7 +10,7 @@
 
 // Solution 1 O(n^3) time | O(1) space
 
-var triangleNumber = function(nums) {
+const triangleNumber = function(nums) {
   let count = 0;
  for (let i = 0; i < nums.length - 2; i++) {
      for (let j = i + 1; j < nums.length - 1; j++) {
@@ -22,4 +22,19 @@ var triangleNumber = function(nums) {
   return count;
 };
 
-// Solution 2
+// Solution 2 O(n^2) time | O(1) space
+
+const triangleNumber = function(nums) {
+    let count = 0;
+    nums.sort((a, b) => a - b);
+    for (let i = 0; i < nums.length - 2; i++) {
+        let k = i + 2;
+        for (let j = i + 1; j < nums.length - 1 && nums[i] !== 0; j++) {
+            while (k < nums.length && nums[k] < nums[i] + nums[j]) {
+                k++;
+            }
+            count += k - j - 1;
+        }
+    }
+    return count;
+};
