@@ -26,7 +26,7 @@ class BrowserHistory {
       return this.backArr[this.backArr.length - 1];
   }
   forward(steps) {
-      while(steps && this.forwardArr.length > 1) {
+      while(steps && this.forwardArr.length > 0) {
           this.backArr.push(this.forwardArr.pop());
           steps--;
       }
