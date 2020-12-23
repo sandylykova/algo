@@ -31,3 +31,44 @@ function isInterleaveHelper(s1, s2, s3, i, j) {
   }
   return false;
 }
+
+// Solution 2 O(n + m) time | O() space
+
+var isInterleave = function(s1, s2, s3) {
+  if (s1.length + s2.length !== s3.length) {
+      return false;
+  }
+  let memo = {};
+  return check(s1, s2, s3, s1.length, s2.length, s3.length, 0, 0, 0, memo);
+};
+
+function check(s1, s2, s3, len1, len2, len3, p1, p2, p3, memo) {
+  let key = String(p1) + '*' + String(p2) + '*' + String(p3);
+  if (memo[key] !== undefined) return memo[key];
+  if (p3 === len3) {
+      if (len1 === p1 && len2 === p2) return true;
+      else return false;
+  }
+  if (len1 === p1) {
+      if (s2[p2] === s3[p3]) {
+          memo[key] = check(s1, s2, s3, len1, len2, len3, p1, p2 + 1, p3 + 1, memo);
+      } else {
+          memo[key] = false;
+      }
+  }
+  if (len2 === p2) {
+      if (s1[p1] === s3[p3]) {
+          memo[key] = check(s1, s2, s3, len1, len2, len3, p1 + 1, p2, p3 + 1, memo);
+      } else {
+          memo[key] = false;
+      }
+  }
+  let one = false, two = false;
+  if (s1[p1] === s3[p3]) {
+      one = check(s1, s2, s3, len1, len2, len3, p1 + 1, p2, p3 + 1, memo);
+  }
+  if (s2[p2] === s3[p3]) {
+      two = check(s1, s2, s3, len1, len2, len3, p1, p2 + 1, p3 + 1, memo);
+  }
+  return memo[key] = one || two;
+}
