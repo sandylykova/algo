@@ -32,7 +32,7 @@ function isInterleaveHelper(s1, s2, s3, i, j) {
   return false;
 }
 
-// Solution 2 O(n + m) time | O() space
+// Solution 2 O(nm) time | O(nm) space
 
 var isInterleave = function(s1, s2, s3) {
   if (s1.length + s2.length !== s3.length) {
