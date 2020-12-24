@@ -20,13 +20,13 @@ function findSuccessor(tree, node) {
   function inOrderTraverse(tree) {
 		if (tree === null) return;
 		inOrderTraverse(tree.left);
-		result.push(tree.value);
+		result.push(tree);
 		inOrderTraverse(tree.right);
 	}
 	inOrderTraverse(tree);
 	for (let i = 0; i < result.length; i++) {
-		if (result[i] === node.value && i < result.length - 1) {
-			return new BinaryTree(result[i + 1]);
+		if (result[i] === node && i < result.length - 1) {
+			return result[i + 1];
 		}
 	}
   return null;
