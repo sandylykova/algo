@@ -16,3 +16,14 @@ function firstDuplicateValue(array) {
 	}
 	return -1;
 }
+
+// Solution 2 O(n) time | O(1) space
+
+function firstDuplicateValue(array) {
+  for (let i = 0; i < array.length; i++) {
+		let current = Math.abs(array[i]);
+		if (array[current - 1] < 0) return Math.abs(array[i]);
+		array[current - 1] *= -1;
+	}
+  return -1;
+}
