@@ -27,3 +27,5 @@ function firstDuplicateValue(array) {
 	}
   return -1;
 }
+
+// Solution 3 O(n^2) time | O(1) space
