@@ -23,3 +23,23 @@ var convertBST = function(root) {
   inOrderRightTraversal(node);
   return root;
 };
+
+// Solution 2 O(n) time | O(n) space
+
+var convertBST = function(root) {
+  if (!root) return root;
+  let node = root;
+  let stack = [];
+  let sum = 0;
+  while (stack.length > 0 || node !== null) {
+      while (node !== null) {
+          stack.push(node);
+          node = node.right;
+      }
+      node = stack.pop();
+      sum += node.val;
+      node.val = sum;
+      node = node.left;
+  }
+  return root;
+};
