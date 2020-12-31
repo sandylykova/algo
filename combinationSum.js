@@ -15,7 +15,7 @@
 
 // Solution 1
 
-var combinationSum = function(candidates, target) {
+const combinationSum = function(candidates, target) {
   let result = [];
   function backtrack(remaining, curr, start) {
       if (remaining < 0) return;
