@@ -1,6 +1,5 @@
 // 296. Best Meeting Point
-
-var minTotalDistance = function(grid) {
+const minTotalDistance = function(grid) {
   let coordinats = [];
   for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
