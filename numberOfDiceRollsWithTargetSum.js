@@ -17,7 +17,7 @@ var numRollsToTarget = function(d, f, target) {
   let MOD = Math.pow(10, 9) + 7;
   numberOfWays[0][0] = 1;
   for (let i = 1; i <= d; i++) {
-      for (let j = 0; j <= target; j++) {
+      for (let j = 1; j <= target; j++) {
           for (let k = 1; k <= f; k++) {
               if (j >= k) {
                   numberOfWays[i][j] = (numberOfWays[i][j] + numberOfWays[i - 1][j - k]) % MOD;
