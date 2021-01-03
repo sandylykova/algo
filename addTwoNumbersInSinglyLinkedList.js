@@ -35,3 +35,27 @@ var addTwoNumbers = function(l1, l2) {
   }
   return dummyHead.next;
 };
+
+// Solution 2 - 'cleaner first solution'
+
+var addTwoNumbers = function(l1, l2) {
+  let dummyHead = new ListNode(0);
+  let p1 = l1;
+  let p2 = l2;
+  let carry = 0;
+  let current = dummyHead;
+  while (p1 || p2) {
+      let value1 = p1 ? p1.val : 0;
+      let value2 = p2 ? p2.val : 0;
+      let sum = value1 + value2 + carry;
+      carry = Math.floor(sum / 10);
+      current.next = new ListNode(sum % 10);
+      current = current.next;
+      p1 = p1 ? p1.next : null;
+      p2 = p2 ? p2.next : null;
+  }
+  if (carry) {
+      current.next = new ListNode(carry);
+  }
+  return dummyHead.next;
+};
