@@ -4,7 +4,7 @@
 // Output: 2
 // Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 
-var threeSumClosest = function(nums, target) {
+const threeSumClosest = function(nums, target) {
   if (nums.length < 3) return;
   let minDif = Infinity;
   nums.sort((a, b) => a - b);
