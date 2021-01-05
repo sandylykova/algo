@@ -46,3 +46,31 @@ var decodeString = function(s) {
   }
   return ret;
 };
+
+// Solution 2 O(maxK^countK * n) time, where maxKis the maximum value of k, countK is the count of nested k values and n is the maximum length of encoded string.
+
+var decodeString = function(s) {
+  let stack = [];
+  for (let char of s) {
+      if (char === ']') {
+          let str = [];
+          while (stack[stack.length - 1] !== '[') {
+              str.push(stack.pop());
+          }
+          str = str.reverse().join('');
+          stack.pop();
+          let num = [];
+          while (stack[stack.length - 1] >= 0 && stack[stack.length - 1] <= 9) {
+              num.push(stack.pop());
+          }
+          num = num.reverse().join('');
+          while (num > 0) {
+              stack.push(str);
+              num--;
+          }
+      } else {
+          stack.push(char);
+      }
+  }
+  return stack.join('');
+};
