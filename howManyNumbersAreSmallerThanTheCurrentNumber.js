@@ -26,3 +26,24 @@ var smallerNumbersThanCurrent = function(nums) {
     }
     return resultArray;
 };
+
+// Solution 2 O(nlog(n)) time | O(n) space
+
+var smallerNumbersThanCurrent = function(nums) {
+  let copy = [];
+  for (let i = 0; i < nums.length; i++) {
+      copy[i] = nums[i];
+  }
+  let ans = [];
+  let map = new Map();
+  copy.sort((a, b) => a - b);
+  for (let i = 0; i < copy.length; i++) {
+      if (!map.has(copy[i])) map.set(copy[i], i);
+  }
+  for (let i = 0; i < nums.length; i++) {
+      ans[i] = map.get(nums[i]);
+  }
+  return ans;
+};
+
+// Solution 3
