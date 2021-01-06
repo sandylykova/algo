@@ -46,4 +46,22 @@ var smallerNumbersThanCurrent = function(nums) {
   return ans;
 };
 
-// Solution 3
+// Solution 3 O(n) time | O(n) space
+
+var smallerNumbersThanCurrent = function(nums) {
+    let arrayOfValues = new Array(101).fill(0);
+    for (let i = 0; i < nums.length; i++) {
+        arrayOfValues[nums[i]]++;
+    }
+    let result = [];
+    for (let i = 1; i < arrayOfValues.length; i++) {
+        arrayOfValues[i] += arrayOfValues[i - 1];
+    }
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) result[i] = 0;
+        else {
+            result[i] = arrayOfValues[nums[i] - 1];
+        }
+    }
+    return result;
+};
