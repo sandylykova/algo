@@ -42,7 +42,26 @@ var trap = function(height) {
       right[i] = Math.max(height[i], right[i + 1]);
   }
   for (let i = 0; i < len; i++) {
-      water += Math.min(left[i], right[i]) - height[i]
+      water += Math.min(left[i], right[i]) - height[i];
   }
   return water;
+};
+
+// Solution 3 O(n) time | O(1) space
+
+var trap = function(height) {
+  if (!height || !height.length) return 0;
+  let left = 0, leftMax = 0;
+  let right = height.length - 1, rightMax = 0;
+  let ans = 0;
+  while (left < right) {
+      if (height[left] < height[right]) {
+          leftMax >= height[left] ? ans += leftMax - height[left] : leftMax = height[left];
+          left++;
+      } else {
+          rightMax >= height[right] ? ans += rightMax - height[right] : rightMax = height[right];
+          right--;
+      }
+  }
+  return ans;
 };
