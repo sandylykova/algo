@@ -38,7 +38,6 @@ function getCommonAncestor(nodeWithBiggerDepth, nodeWithLowerDepth, d1, d2) {
 
 const getDepth = (root, target, level) => {
   let stack = [[root, level, null]];
-  let parent = null;
   while (stack.length) {
       let [node, level, parent] = stack.pop();
       node.parent = parent;
