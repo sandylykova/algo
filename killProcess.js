@@ -12,19 +12,20 @@
 // kill = 5
 // Output: [5,10]
 
+// Solution 1 O
 var killProcess = function(pid, ppid, kill) {
-  const adj = new Map([[0,[]]]);
-  pid.forEach((v) => adj.set(v,[]));
-  ppid.forEach((v,i) => adj.get(v).push(pid[i]));
-
-  const res = [];
-  function dfs(root){
-    if(!adj.has(root)) return;
-    if(adj.has(root)) res.push(root);
-    for(let child of adj.get(root)) {
-      dfs(child);
-    }
+  let map = new Map();
+  map.set(0, []);
+  pid.forEach(val => map.set(val, []));
+  ppid.forEach((val, idx) => map.get(val).push(pid[idx]));
+  let result = [];
+  function traverse(node) {
+      if (!map.has(node)) return;
+      result.push(node);
+      for (let eachChild of map.get(node)) {
+          traverse(eachChild);
+      }
   }
-  dfs(kill);
-  return res;
+  traverse(kill);
+  return result;
 };
