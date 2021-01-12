@@ -39,3 +39,32 @@ var minRemoveToMakeValid = function(s) {
   }
   return arr.join('');
 };
+
+// Solution 2 O(n) time | O(n) space
+
+var minRemoveToMakeValid = function(s) {
+  let stack = [];
+  let indexToRemove = new Set();
+  for (let i = 0; i < s.length; i++) {
+      let val = s[i];
+      if (val !== '(' && val !== ')') continue;
+      if (val === '(') stack.push(i);
+      else {
+          if (stack.length === 0) {
+              indexToRemove.add(i);
+          } else {
+              stack.pop();
+          }
+      }
+  }
+  while (stack.length > 0) {
+      indexToRemove.add(stack.pop());
+  }
+  let arr = [];
+  for (let i = 0; i < s.length; i++) {
+      if (!indexToRemove.has(i)) {
+          arr.push(s[i]);
+      }
+  }
+  return arr.join('');
+};
