@@ -44,3 +44,21 @@ function groupAnagrams(words) {
 	}
 	return Object.values(anagrams);
 }
+
+// Solution 3
+
+var groupAnagrams = function(strs) {
+	let hash = {};
+	for (let str of strs) {
+			let sorted = str.split('').sort().join('');
+			if (!(sorted in hash)) {
+					hash[sorted] = [];
+			}
+			hash[sorted].push(str);
+	}
+	let ans = [];
+	for (let key in hash) {
+			ans.push(hash[key]);
+	}
+	return ans;
+};
