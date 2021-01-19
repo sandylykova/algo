@@ -62,3 +62,27 @@ var groupAnagrams = function(strs) {
 	}
 	return ans;
 };
+
+// Solution 4 O(n * m) time | O(n * m) space
+
+function groupAnagrams(words) {
+	let hash = {};
+	for (let word of words) {
+		let count = getCount(word);
+		if (!(count in hash)) hash[count] = [];
+		hash[count].push(word);
+	}
+	return Object.values(hash);
+}
+
+function getCount(word) {
+	let count = new Array(52).fill(0);
+	let a = 'a';
+	for (let i = 0; i < word.length; i++) {
+		let indexOfChar = (word.charCodeAt(i) - a.charCodeAt(0)) * 2;
+		let indexOfDel = indexOfChar + 1;
+		count[indexOfChar]++;
+		count[indexOfDel] = '*';
+	}
+	return count.join('');
+}
