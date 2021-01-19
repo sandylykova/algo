@@ -30,3 +30,33 @@ function isOutOfOrder(i, num, array) {
 		return num > array[i + 1] || array[i] < array[i - 1];
 	}
 }
+
+// Solution 2 O(n) time | O(1) space
+
+function subarraySort(array) {
+	let min = Infinity;
+	let max = -Infinity;
+	for (let i = 0; i < array.length; i++) {
+		let curr = array[i];
+		let prev = array[i - 1];
+		let next = array[i + 1];
+		if (prev && curr < prev) {
+			min = Math.min(min, curr);
+		}
+		if (next && curr > next) {
+			max = Math.max(max, curr);
+		}
+	}
+	if (min === Infinity) {
+		return [-1, -1];
+	}
+	let positionLeft = 0;
+	while (min >= array[positionLeft]) {
+		positionLeft++;
+	}
+	let positionRight = array.length - 1;
+	while (max <= array[positionRight]) {
+		positionRight--;
+	}
+	return [positionLeft, positionRight];
+}
