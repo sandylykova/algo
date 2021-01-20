@@ -4,7 +4,7 @@
 
 // Return the max sliding window.
 
-// Solution 1 brute force
+// Solution 1 brute force O(n * k) time | O(n - k + 1) space
 
 var maxSlidingWindow = function(nums, k) {
   let max = [];
