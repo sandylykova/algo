@@ -9,7 +9,7 @@
 
 // Also note that this graph may contain self-loops. A self-loop is an edge that has the same destination and origin; in other words, it's an edge that connects a vertex to itself. For the purpose of this question, a self-loop is considered a cycle.
 
-// Solution 1 O(e + v) time | O(e + v) space
+// Solution 1 O(e + v) time | O(v) space
 
 function cycleInGraph(edges) {
 	let visited = new Set();
