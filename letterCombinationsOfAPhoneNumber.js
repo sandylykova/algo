@@ -43,3 +43,38 @@ var letterCombinations = function(digits) {
   getAllCombinations([], allNeededLetters);
   return ans;
 };
+
+// Solution 2
+
+function phoneNumberMnemonics(phoneNumber) {
+	const numberToLetters = {
+		'1': '1',
+		'2': 'abc',
+		'3': 'def',
+		'4': 'ghi',
+		'5': 'jkl',
+		'6': 'mno',
+		'7': 'pqrs',
+		'8': 'tuv',
+		'9': 'wxyz',
+		'0': '0'
+    };
+	let ans = [];
+	function backtrack(curr, arr, phoneNumber) {
+		if (curr.length === phoneNumber.length) {
+			let str = curr.join('');
+			ans.push(str);
+			return;
+		}
+		for (let i = 0; i < arr.length; i++) {
+			for (let j = 0; j < numberToLetters[arr[i]].length; j++) {
+				curr.push(numberToLetters[arr[i]][j]);
+				let newArr = arr.slice(i + 1);
+				backtrack(curr, newArr, phoneNumber);
+				curr.pop();
+			}
+		}
+	}
+	backtrack([], phoneNumber, phoneNumber);
+  return ans;
+}
