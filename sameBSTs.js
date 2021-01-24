@@ -43,3 +43,31 @@ function getBiggerOrEqual(arr) {
 	}
 	return bigger;
 }
+
+// Solution 2
+
+function sameBsts(arrayOne, arrayTwo) {
+	if (arrayOne.length !== arrayTwo.length || arrayOne[0] !== arrayTwo[0]) return false;
+	if (arrayOne.length === 0 &&  arrayTwo.length === 0) return true;
+	let smaller1 = [];
+	let smaller2 = [];
+	let bigger1 = [];
+	let bigger2 = [];
+	let root1= arrayOne[0];
+	let root2 = arrayTwo[0];
+	for (let i = 1; i < arrayOne.length; i++) {
+		if (arrayOne[i] < root1) {
+			smaller1.push(arrayOne[i]);
+		} else {
+			bigger1.push(arrayOne[i]);
+		}
+		if (arrayTwo[i] < root2) {
+			smaller2.push(arrayTwo[i]);
+		} else {
+			bigger2.push(arrayTwo[i]);
+		}
+	}
+	let left = sameBsts(smaller1, smaller2);
+	let right = sameBsts(bigger1, bigger2);
+	return left && right;
+}
