@@ -22,4 +22,14 @@ function maxPathSum(tree) {
 
 // Solution 2 O(n) time | O(log(n)) space - because of call stack
 
-
+function maxPathHelper(node) {
+	if (!node) return [0, -Infinity];
+	let [leftMaxSumAsBranch, leftMaxPathSum] = maxPathHelper(node.left);
+	let [rightMaxSumAsBranch, rightMaxPathSum] = maxPathHelper(node.right);
+	let {value} = node;
+	let maxChildSumAsBranch = Math.max(leftMaxSumAsBranch, rightMaxSumAsBranch);
+	let maxSumAsBranch = Math.max(maxChildSumAsBranch + value, value);
+	let maxSumWithRootNode = Math.max(maxSumAsBranch, leftMaxSumAsBranch + value + rightMaxSumAsBranch);
+	let runningMax = Math.max(maxSumWithRootNode, leftMaxPathSum, rightMaxPathSum);
+	return [maxSumAsBranch, runningMax];
+}
