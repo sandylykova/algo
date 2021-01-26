@@ -54,3 +54,34 @@ function maxSumIncreasingSubsequence(array) {
 	}
 	return [max, large];
 }
+
+// Solution 2 O(n^2) time | O(n) space
+
+function maxSumIncreasingSubsequence(array) {
+	let maxValues = array.slice();
+	let indecies = new Array(array.length).fill(null);
+	let maxSumIdx = 0;
+	for (let i = 1; i < array.length; i++) {
+		let currentValue = array[i];
+		for (let j = 0; j < i; j++) {
+			let prev = array[j];
+			if (prev < currentValue && maxValues[j] + currentValue >= maxValues[i]) {
+				maxValues[i] = maxValues[j] + currentValue;
+				indecies[i] = j;
+			}
+		}
+		if (maxValues[i] >= maxValues[maxSumIdx]) {
+			maxSumIdx = i;
+		}
+	}
+	return [maxValues[maxSumIdx], buildReturnValue(array, indecies, maxSumIdx)];
+}
+
+function buildReturnValue(array, indecies, maxSumIdx) {
+	let vals = [];
+	while (maxSumIdx !== null) {
+		vals.push(array[maxSumIdx]);
+		maxSumIdx = indecies[maxSumIdx];
+	}
+	return vals.reverse();
+}
