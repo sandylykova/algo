@@ -26,10 +26,7 @@ var highFive = function(items) {
   }
   for (let [key, value] of map) {
       let sum = 0;
-      let counter = 0;
-      for (let i = 0; i < value.length; i++) {
-          counter++;
-          if (counter === 6) break;
+      for (let i = 0; i < 5; i++) {
           sum += value[i];
       }
       ans.push([key, Math.floor(sum / 5)]);
