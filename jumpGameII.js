@@ -30,14 +30,15 @@ var jump = function(nums) {
   return jumps + 1;
 };
 
-// Solution 2 O(n) time | O(1) space
+// Solution 2 O(n^2) time | O(n) space
 
-var canJump = function(nums) {
-  let lastValidIdx = nums.length - 1;
-  for (let i = lastValidIdx - 1; i >= 0; i--) {
-      if (nums[i] + i >= lastValidIdx) {
-          lastValidIdx = i;
+var jump = function(nums) {
+  let jumps = new Array(nums.length).fill(Infinity);
+  jumps[0] = 0;
+  for (let i = 1; i < nums.length; i++) {
+      for (let j = 0; j < i; j++) {
+          if (nums[j] >= i - j) jumps[i] = Math.min(jumps[j] + 1, jumps[i]);
       }
   }
-  return lastValidIdx === 0;
+  return jumps[jumps.length - 1];
 };
