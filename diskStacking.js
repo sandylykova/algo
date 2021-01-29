@@ -38,3 +38,36 @@ function diskStacking(disks) {
 	}
 	return maxDisks;
 }
+
+// Solution 2 O(n^2) time | O(n) space
+
+function diskStacking(disks) {
+  if (disks.length === 1 || !disks.length) return disks;
+	disks.sort((a, b) => a[2] - b[2]);
+	let heights = disks.map(a => a[2]);
+	let maxHeightIdx = 0;
+	let sequence = new Array(disks.length).fill(null);
+	for (let i = 1; i < disks.length; i++) {
+		let currDisk = disks[i];
+		for (let j = 0; j < i; j++) {
+			let otherDisk = disks[j];
+			if (currDisk[0] > otherDisk[0] && currDisk[1] > otherDisk[1] && currDisk[2] > otherDisk[2]) {
+				if (heights[i] < currDisk[2] + heights[j]) {
+					heights[i] = currDisk[2] + heights[j];
+					sequence[i] = j;
+				}
+			}
+		}
+		if (heights[i] >= heights[maxHeightIdx]) maxHeightIdx = i;
+	}
+	return buildSequence(disks, sequence, maxHeightIdx);
+}
+
+function buildSequence(disks, sequence, maxHeightIdx) {
+	let ans = [];
+	while (maxHeightIdx !== null) {
+		ans.push(disks[maxHeightIdx]);
+		maxHeightIdx = sequence[maxHeightIdx];
+	}
+	return ans.reverse();
+}
