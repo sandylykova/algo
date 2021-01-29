@@ -22,3 +22,16 @@ var canJump = function(nums) {
   }
   return jumps[jumps.length - 1] === Infinity ? false : true;
 };
+
+
+// Solution 2 O(n) time | O(1) space
+
+var canJump = function(nums) {
+  let lastValidIdx = nums.length - 1;
+  for (let i = lastValidIdx - 1; i >= 0; i--) {
+      if (nums[i] + i >= lastValidIdx) {
+          lastValidIdx = i;
+      }
+  }
+  return lastValidIdx === 0;
+};
