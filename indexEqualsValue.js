@@ -18,3 +18,25 @@ function indexEqualsValue(array) {
 	}
 	return -1;
 }
+
+// Solution 2 O(log(n)) time | O(1) space
+
+function indexEqualsValue(array) {
+  let left = 0;
+	let right = array.length - 1;
+	while (left <= right) {
+		let midIdx = Math.floor((left + right) / 2);
+		let midValue = array[midIdx];
+		if (midValue < midIdx) {
+			left = midIdx + 1;
+		} else if (midIdx === 0 && midValue === midIdx) {
+			return 0;
+		} else if (midValue === midIdx && array[midIdx - 1] < midValue - 1) {
+			return midIdx;
+		} else {
+			right = midIdx - 1;
+		}
+	}
+	return -1;
+}
+
