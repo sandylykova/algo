@@ -1,5 +1,5 @@
 // AlgoExpert: Valid Starting City
-// Difficulty: hard
+// Difficulty: medium
 
 // Imagine you have a set of cities that are laid out in a circle, connected by a circular road that runs clockwise. Each city has a gas station that provides gallons of fuel, and each city is some distance away from the next city.
 
