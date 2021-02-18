@@ -17,7 +17,7 @@
 // 62 + 82 = 100
 // 12 + 02 + 02 = 1
 
-// Solution 1
+// Solution 1 O(log(n)) time | O(log(n)) space
 
 var isHappy = function(n) {
   let set = new Set();
@@ -32,4 +32,25 @@ var isHappy = function(n) {
       n = sum;
   }
   return n === 1;
+};
+
+// Solution 2 O(log(n)) time | O(log(n)) space
+
+function getNext(n) {
+  let sum = 0;
+  while (n > 0) {
+      sum += Math.pow(n % 10, 2);
+      n = Math.floor(n / 10);
+  }
+  return sum;
+}
+
+var isHappy = function(n) {
+  let fast = getNext(n);
+  let slow = n;
+  while (fast !== 1 && slow !== fast) {
+      slow = getNext(slow);
+      fast = getNext(getNext(fast));
+  }
+  return fast === 1;
 };
