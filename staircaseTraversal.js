@@ -43,3 +43,19 @@ function numberOfWaysToTop(height, maxSteps, memo) {
 	memo.set(height, numberOfWays);
 	return numberOfWays;
 }
+
+// Solution 3 O(k * n) time | O(n) space, where k is the number of allowed steps and n is the height of the staircase
+
+function staircaseTraversal(height, maxSteps) {
+  let steps = new Array(height + 1).fill(0);
+	steps[0] = 1;
+	steps[1] = 1;
+	for (let i = 2; i < steps.length; i++) {
+		let step = 1;
+		while (step <= maxSteps && step <= i) {
+			steps[i] = steps[i] + steps[i - step];
+			step += 1;
+		}
+	}
+  return steps[height];
+}
