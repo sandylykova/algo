@@ -60,3 +60,36 @@ function subarraySort(array) {
 	}
 	return [positionLeft, positionRight];
 }
+
+// Solution 3
+
+function subarraySort(array) {
+	let minOutOfOrder = Infinity;
+	let maxOutOfOrder = -Infinity;
+	for (let i = 0; i < array.length; i++) {
+		if (!isOutOfOrder(i, array)) {
+			minOutOfOrder = Math.min(minOutOfOrder, array[i]);
+			maxOutOfOrder = Math.max(maxOutOfOrder, array[i]);
+		}
+	}
+	if (minOutOfOrder === Infinity) return [-1, -1];
+	let i = 0;
+	while (minOutOfOrder >= array[i]) {
+		i++;
+	}
+	minOutOfOrder = i;
+	i = array.length - 1;
+	while (maxOutOfOrder <= array[i]) {
+		i--;
+	}
+	maxOutOfOrder = i;
+	return [minOutOfOrder, maxOutOfOrder];
+}
+
+function isOutOfOrder(i, array) {
+	if (i === 0) return array[i] <= array[i + 1];
+	else if (i === array.length - 1) return array[i] >= array[i - 1];
+	else {
+		return array[i - 1] <= array[i] && array[i] <= array[i + 1];
+	}
+}
