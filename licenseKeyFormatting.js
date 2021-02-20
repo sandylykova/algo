@@ -52,3 +52,13 @@ var licenseKeyFormatting = function(S, K) {
     let final = result.join('-');
     return final;
 };
+
+// Solution 2
+
+var licenseKeyFormatting = function(S, K) {
+  S = S.split("-").join('').split('');
+  for (let i = S.length - K - 1; i >= 0; i -= K) {
+      S[i] += "-";
+  }
+  return S.join('').toUpperCase();
+};
