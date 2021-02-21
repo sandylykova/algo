@@ -30,7 +30,7 @@ function groupAnagrams(words) {
 	return result;
 }
 
-// Solution 2 O(w*n*log(n)) time | O(wn) space - where w is the number of words and n is the length of the longest word
+// Solution 2 O(n*klog(k)) where n is the length of input array and k is the maximum length of a string in input array
 
 function groupAnagrams(words) {
 	let anagrams = {};
@@ -45,7 +45,7 @@ function groupAnagrams(words) {
 	return Object.values(anagrams);
 }
 
-// Solution 3
+// Solution 3 O(n*klog(k)) where n is the length of input array and k is the maximum length of a string in input array
 
 var groupAnagrams = function(strs) {
 	let hash = {};
@@ -63,7 +63,7 @@ var groupAnagrams = function(strs) {
 	return ans;
 };
 
-// Solution 4 O(n * m) time | O(n * m) space
+// Solution 4 O(n * m) time | O(n) space, where n is the size of input array and m is the maximum length of string in input array
 
 function groupAnagrams(words) {
 	let hash = {};
