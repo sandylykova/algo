@@ -28,3 +28,41 @@ function helperCheckFunction(string, left, right) {
 	}
 	return string.slice(left + 1, right);
 }
+
+// Solution 2 similar to solution 1
+
+function longestPalindromicSubstring(string) {
+	let maxLength = 0;
+	let maxString = '';
+	let currLength = 0;
+	let currString = '';
+	for (let i = 0; i < string.length; i++) {
+		let isPalindrome1 = checkPalindrome(i, string, true);
+		let isPalindrome2 = checkPalindrome(i, string, false);
+		isPalindrome1.length > isPalindrome2.length ? currLength = isPalindrome1.length : currLength = isPalindrome2.length;
+		isPalindrome1.length > isPalindrome2.length ? currString = isPalindrome1 : currString = isPalindrome2;
+		if (maxLength < currLength) {
+			maxLength = currLength;
+			maxString = currString;
+		}
+	}
+	return maxString;
+}
+
+function checkPalindrome(center, string, isAround) {
+	let left, right;
+	if (isAround) {
+		left = center - 1;
+		right = center + 1;
+	} else {
+		left = center;
+		right = center + 1;
+	}
+	while (left >= 0 && right < string.length && string[left] === string[right]) {
+		left--;
+		right++;
+	}
+	let returned = string.slice(left + 1, right);
+	return returned;
+}
+
