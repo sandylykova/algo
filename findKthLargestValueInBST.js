@@ -15,7 +15,7 @@ function findKthLargestValueInBst(tree, k) {
   return nodes[k - 1];
 }
 
-// Solution 2 O(h + k) time | O(h) space - where h is the height of BST
+// Solution 2 O(h + k) time | O(h + k) space - where h is the height of BST
 
 function findKthLargestValueInBst(tree, k) {
 	let nodes = [];
