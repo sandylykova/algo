@@ -5,12 +5,26 @@
 
 function findKthLargestValueInBst(tree, k) {
 	let nodes = [];
-  function reserseInOrderTraversal(node) {
+  function reverseInOrderTraversal(node) {
 		if (node === null) return;
-		reserseInOrderTraversal(node.right);
+		reverseInOrderTraversal(node.right);
 		nodes.push(node.value);
-		reserseInOrderTraversal(node.left);
+		reverseInOrderTraversal(node.left);
 	}
-	reserseInOrderTraversal(tree);
+	reverseInOrderTraversal(tree);
+  return nodes[k - 1];
+}
+
+// Solution 2 O(h + k) time | O(h) space - where h is the height of BST
+
+function findKthLargestValueInBst(tree, k) {
+	let nodes = [];
+  function reverseInOrderTraversal(node) {
+		if (node === null || nodes.length === k) return;
+		reverseInOrderTraversal(node.right);
+		nodes.push(node.value);
+		reverseInOrderTraversal(node.left);
+	}
+	reverseInOrderTraversal(tree);
   return nodes[k - 1];
 }
