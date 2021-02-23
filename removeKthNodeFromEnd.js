@@ -1,3 +1,6 @@
+// AlgoExpert: Remove Kth Node From End
+// Difficulty: medium
+
 // Write a function that takes in the head of a Singly Linked List and an integer k and removes the kth node from the end of the list.
 
 // The removal should be done in place, meaning that the original data structure should be mutated (no new structure should be created).
@@ -19,6 +22,8 @@ class LinkedList {
     this.next = null;
   }
 }
+
+// Solution 1 O(n) time | O(1) space
 
 function removeKthNodeFromEnd(head, k) {
   let first = head;
@@ -61,3 +66,27 @@ var removeNthFromEnd = function(head, n) {
   second.next = second.next.next;
   return returned;
 };
+
+// Solution 3 O(n) time | O(1) space
+
+function removeKthNodeFromEnd(head, k) {
+	let len = 1;
+	let node = head;
+	while (node) {
+		node = node.next;
+		len++;
+	}
+	node = head;
+	let kthLen = len - k - 1;
+	if (kthLen === 0) {
+		head.value = head.next.value;
+		head.next = head.next.next;
+		return;
+	}
+	let curr = 1;
+	while (curr !== kthLen) {
+		node = node.next;
+		curr++;
+	}
+	node.next = node.next.next;
+}
