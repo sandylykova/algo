@@ -19,3 +19,16 @@ var minCostClimbingStairs = function(cost) {
   }
   return Math.min(costs[costs.length - 2], costs[costs.length - 1]);
 };
+
+// Solution 2 O(n) time | O(1) space
+
+var minCostClimbingStairs = function(cost) {
+  let minCostOneStepBefore = cost[1];
+  let minCostTwoStepsBefore = cost[0];
+  for (let i = 2; i < cost.length; i++) {
+      let current = Math.min(cost[i] + minCostTwoStepsBefore, cost[i] + minCostOneStepBefore);
+      minCostTwoStepsBefore = minCostOneStepBefore;
+      minCostOneStepBefore = current;
+  }
+  return Math.min(minCostOneStepBefore, minCostTwoStepsBefore);
+};
