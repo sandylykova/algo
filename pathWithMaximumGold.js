@@ -18,7 +18,7 @@
 //  [0,9,0]]
 // Path to get the maximum gold, 9 -> 8 -> 7.
 
-// Solution 1
+// Solution 1 O(4*3^k) time, where k is the number of cells with gold | O(k) space
 
 var getMaximumGold = function(grid) {
   let max = 0;
@@ -41,7 +41,7 @@ function dfs(i, j, grid) {
   return result;
 }
 
-// Solution 2
+// Solution 2 O(4*3^k) time, where k is the number of cells with gold | O(k) space
 
 var getMaximumGold = function(grid) {
   let max = 0;
