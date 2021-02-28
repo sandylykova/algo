@@ -15,7 +15,7 @@
 
 // Solution 1 O(nm) time | O(nm) space
 
-var gameOfLife = function(board) {
+const gameOfLife = function(board) {
   let copy = board.map(row => row.map(val => val = val));
   for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
