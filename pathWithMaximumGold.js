@@ -40,3 +40,30 @@ function dfs(i, j, grid) {
   grid[i][j] = val;
   return result;
 }
+
+// Solution 2
+
+var getMaximumGold = function(grid) {
+  let max = 0;
+  for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+          if (grid[i][j] !== 0) {
+              max = Math.max(max, dfs(i, j, grid));
+          }
+      }
+  }
+  return max;
+};
+
+function dfs(i, j, grid) {
+  if (i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || grid[i][j] === 0) return 0;
+  let val = grid[i][j];
+  grid[i][j] = 0;
+  let x = [1, -1, 0, 0], y = [0, 0, 1, -1];
+  let result = 0;
+  for (let k = 0; k < 4; k++) {
+      result = Math.max(result, dfs(i + x[k], j + y[k], grid));
+  }
+  grid[i][j] = val;
+  return result + val;
+}
