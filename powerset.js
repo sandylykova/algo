@@ -16,3 +16,17 @@ function powerset(array) {
 	traverse([], 0);
 	return result;
 }
+
+// Solution 2 O(n*2^n) time | O(n*2^n) space
+
+function powerset(array) {
+  let subsets = [[]];
+	for (let ele of array) {
+		let length = subsets.length;
+		for (let i = 0; i < length; i++) {
+			let currSubset = subsets[i];
+			subsets.push(currSubset.concat(ele));
+		}
+	}
+	return subsets;
+}
