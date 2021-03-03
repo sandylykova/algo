@@ -32,3 +32,25 @@ function waterArea(heights) {
 	}
 	return water;
 }
+
+// Solution 2 O(n) time | O(1) space
+
+function waterArea(heights) {
+	let leftIdx = 0;
+	let rightIdx = heights.length - 1;
+	let leftMax = heights[leftIdx];
+	let rightMax = heights[rightIdx];
+	let waterArea = 0;
+	while (leftIdx < rightIdx) {
+		if (heights[leftIdx] < heights[rightIdx]) {
+			leftIdx++;
+			leftMax = Math.max(leftMax, heights[leftIdx]);
+			waterArea += leftMax - heights[leftIdx];
+		} else {
+			rightIdx--;
+			rightMax = Math.max(rightMax, heights[rightIdx]);
+			waterArea += rightMax - heights[rightIdx];
+		}
+	}
+	return waterArea;
+}
