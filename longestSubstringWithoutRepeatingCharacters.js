@@ -72,3 +72,19 @@ function longestSubstringWithoutDuplication(string) {
       }
       return longest;
   }
+
+  // Solution 4 O(n) time | O(min(a, n)) - where a is the set of unique characters in the input string
+
+  function longestSubstringWithoutDuplication(string) {
+      let hash = {};
+      let startIdx = 0;
+      let longest = [0, 1];
+      for (let i = 0; i < string.length; i++) {
+          if (hash[string[i]] !== undefined) startIdx = Math.max(hash[string[i]] + 1, startIdx);
+          hash[string[i]] = i;
+          if (longest[1] - longest[0] < i + 1 - startIdx) {
+              longest = [startIdx, i + 1];
+          }
+      }
+      return string.slice(longest[0], longest[1]);
+  }
