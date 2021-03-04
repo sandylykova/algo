@@ -55,3 +55,20 @@ function sunsetViews(buildings, direction) {
   return result;
 }
 
+// Solution 2 O(n) time | O(n) space
+
+function sunsetViews(buildings, direction) {
+  let startIdx = direction === 'WEST' ? 0 : buildings.length - 1;
+	let step = direction === 'WEST' ? 1 : -1;
+	let idx = startIdx;
+	let buildingsWithView = [];
+	let maxHeight = 0;
+	while (idx < buildings.length && idx >= 0) {
+		let height = buildings[idx];
+		if (maxHeight < height) buildingsWithView.push(idx);
+		maxHeight = Math.max(maxHeight, height);
+		idx += step;
+	}
+	if (direction === 'EAST') return buildingsWithView.reverse();
+  return buildingsWithView;
+}
