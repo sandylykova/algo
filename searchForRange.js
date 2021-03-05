@@ -57,3 +57,40 @@ function searchForRange(array, target) {
 		return [leftEdge, rightEdge];
 	} else return [-1, -1];
 }
+
+// Solution 2 O(log(n)) time | O(1) space
+
+function searchForRange(array, target) {
+	let range = [];
+	binarySearch(0, array.length - 1, true, range, array, target);
+	binarySearch(0, array.length - 1, false, range, array, target);
+	if (range[0] === undefined) return [-1, -1];
+  return range;
+}
+
+function binarySearch(start, end, goLeft, range, arr, target) {
+	while (start <= end) {
+		let mid = Math.floor((start + end) / 2);
+		if (arr[mid] > target) {
+			end = mid - 1;
+		} else if (arr[mid] < target) {
+			start = mid + 1;
+		} else {
+			if (goLeft) {
+				if (mid === 0 || arr[mid - 1] !== target) {
+					range[0] = mid;
+					break;
+				} else {
+					end = mid - 1;
+				}
+			} else {
+				if (mid === arr.length - 1 || arr[mid + 1] !== target) {
+					range[1] = mid;
+					break;
+				} else {
+					start = mid + 1;
+				}
+			}
+		}
+	}
+}
