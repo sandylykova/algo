@@ -50,4 +50,26 @@ var topKFrequent = function(nums, k) {
   return quickSelect(0, uniqueVals.length - 1);
 };
 
-// Solution 2 with bucket sort
+// Solution 2 with bucket sort O(n) time | O(n) space
+
+var topKFrequent = function(nums, k) {
+    const freqMap = new Map();
+    const bucket = [];
+    const result = [];
+
+    for (let num of nums) {
+        freqMap.set(num, (freqMap.get(num) || 0) + 1);
+    }
+
+    for (let [num, freq] of freqMap) {
+        if (bucket[freq] === undefined) {
+            bucket[freq] = [];
+        }
+        bucket[freq].push(num);
+    }
+    for (let i = bucket.length - 1; i >= 0; i--) {
+        if (bucket[i]) result.push(...bucket[i]);
+        if (result.length === k) break;
+    }
+    return result;
+};
