@@ -19,7 +19,7 @@
 
 // Solution 1 O(log(n)) time | O(log(n)) space
 
-var isHappy = function(n) {
+const isHappy = function(n) {
   let set = new Set();
   while (true) {
       if (set.has(n)) break;
