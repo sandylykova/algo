@@ -26,3 +26,24 @@ var numTeams = function(rating) {
     }
     return count;
 };
+
+// Solution 2 O(n^2) time | O(1) space
+
+var numTeams = function(rating) {
+  let count = 0;
+  let len = rating.length;
+  for (let i = 0; i < len; i++) {
+      let leftSmaller = 0, rightBigger = 0;
+      let leftBigger = 0, rightSmaller = 0;
+      for (let j = 0; j < i; j++) {
+          if (rating[j] > rating[i]) leftBigger++;
+          else if (rating[j] < rating[i]) leftSmaller++;
+      }
+      for (let k = i + 1; k < len; k++) {
+          if (rating[k] > rating[i]) rightBigger++;
+          else if (rating[k] < rating[i]) rightSmaller++;
+      }
+      count += leftBigger * rightSmaller + leftSmaller * rightBigger;
+  }
+  return count;
+};
