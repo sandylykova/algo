@@ -22,15 +22,16 @@ var isNStraightHand = function(hand, W) {
   }
   while (freqMap.size > 0) {
       for (let i = 0; i < W; i++) {
-          if (freqMap.has(min)) freqMap.set(min, freqMap.get(min) - 1);
-          else return false;
-          if (freqMap.get(min) === 0) freqMap.delete(min);
+          if (!freqMap.has(min)) return false;
+          else if (freqMap.get(min) === 1) freqMap.delete(min);
+          else freqMap.set(min, freqMap.get(min) - 1);
           min++;
       }
-      min = getMin(freqMap);
+      if (freqMap.size > 0) min = getMin(freqMap);
   }
   return true;
 };
+
 function getMin(map) {
   let min = Infinity;
   for (let [key, val] of map) {
