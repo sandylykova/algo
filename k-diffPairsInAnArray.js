@@ -30,7 +30,7 @@ var findPairs = function(nums, k) {
   return count;
 };
 
-// Solution 2 O(n) time | O(1) space
+// Solution 2 O(nlog(n)) time | O(1) space
 
 var findPairs = function(nums, k) {
   nums.sort((a, b) => a - b);
