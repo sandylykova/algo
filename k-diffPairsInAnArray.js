@@ -48,3 +48,18 @@ var findPairs = function(nums, k) {
   }
   return result;
 };
+
+// Solution 3 O(n) time | O(n) space
+
+var findPairs = function(nums, k) {
+  let counter = new Map();
+  let result = 0;
+  for (let i = 0; i < nums.length; i++) {
+      counter.set(nums[i], counter.get(nums[i]) + 1 || 1);
+  }
+  for (let [key, val] of counter) {
+      if (k > 0 && counter.has(key + k)) result++;
+      if (k === 0 && val > 1) result++;
+  }
+  return result;
+};
