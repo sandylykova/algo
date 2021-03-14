@@ -28,3 +28,21 @@ function isPal(left, right, substr) {
   }
   return true;
 }
+
+// Solution 2 O(n^2) time | O(1) space
+
+var countSubstrings = function(s) {
+  let result = 0;
+  for (let i = 0; i < s.length; i++) {
+      expandAroundCenter(i, i);
+      expandAroundCenter(i, i + 1);
+  }
+  function expandAroundCenter(start, end) {
+      while (start >= 0 && end < s.length && s[start] === s[end]) {
+          start--;
+          end++;
+          result++;
+      }
+  }
+  return result;
+};
