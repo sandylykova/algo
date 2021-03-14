@@ -29,3 +29,22 @@ var findPairs = function(nums, k) {
   }
   return count;
 };
+
+// Solution 2 O(n) time | O(1) space
+
+var findPairs = function(nums, k) {
+  nums.sort((a, b) => a - b);
+  let left = 0;
+  let right = 1;
+  let result = 0;
+  while (left < nums.length && right < nums.length) {
+      if (left === right || nums[right] - nums[left] < k) right++;
+      else if (nums[right] - nums[left] > k) left++;
+      else {
+          left++;
+          result++;
+          while (left < nums.length && nums[left] === nums[left - 1]) left++;
+      }
+  }
+  return result;
+};
