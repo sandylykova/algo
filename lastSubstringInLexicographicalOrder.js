@@ -6,7 +6,7 @@
 // Output: "bab"
 // Explanation: The substrings are ["a", "ab", "aba", "abab", "b", "ba", "bab"]. The lexicographically maximum substring is "bab".
 
-// Solution 1
+// Solution 1 O(n^2) time | O(n) space
 
 var lastSubstring = function(s) {
   let candidates = [[s[0], 0]];
@@ -25,4 +25,23 @@ var lastSubstring = function(s) {
       }
   }
   return maxSubstring;
+};
+
+// Solution 2 O(n) time | O(1) space
+
+var lastSubstring = function(s) {
+  let i = 0, j = 1, offset = 0;
+  while (j + offset < s.length) {
+      if (s[i + offset] > s[j + offset]) {
+          j = j + offset + 1;
+          offset = 0;
+      } else if (s[i + offset] < s[j + offset]) {
+          i = Math.max(j, i + offset + 1);
+          j = i + 1;
+          offset = 0;
+      } else {
+          offset += 1;
+      }
+  }
+  return s.slice(i);
 };
