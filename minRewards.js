@@ -35,7 +35,7 @@ function expandFromValley(valley, scores, rewards) {
 	}
 }
 
-// Solution 2
+// Solution 2 O(n) time | O(n) space
 
 function minRewards(scores) {
 	let valley = [];
@@ -75,4 +75,21 @@ function isValley(i, scores) {
 	} else {
 		return scores[i] < scores[i + 1] && scores[i] < scores[i - 1];
 	}
+}
+
+// Solution 3 O(n) time | O(n) space
+
+function minRewards(scores) {
+	let rewards = new Array(scores.length).fill(1);
+  for (let i = 1; i < scores.length; i++) {
+		if (scores[i] > scores[i - 1]) {
+			rewards[i] = rewards[i - 1] + 1;
+		}
+	}
+	for (let i = scores.length - 2; i >= 0; i--) {
+		if (scores[i] > scores[i + 1]) {
+			rewards[i] = Math.max(rewards[i + 1] + 1, rewards[i]);
+		}
+	}
+	return rewards.reduce((acc, reward) => acc + reward, 0);
 }
