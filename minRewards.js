@@ -34,3 +34,45 @@ function expandFromValley(valley, scores, rewards) {
 		right++;
 	}
 }
+
+// Solution 2
+
+function minRewards(scores) {
+	let valley = [];
+	for (let i = 0; i < scores.length; i++) {
+		if (isValley(i, scores)) {
+			valley.push(i);
+		}
+	}
+	if (valley.length === 0) {
+		let minRew = 0;
+		for (let i = 1; i <= scores.length; i++) {
+			minRew += i;
+		}
+		return minRew;
+	}
+	let minRewards = new Array(scores.length).fill(1);
+	for (let i = 0; i < valley.length; i++) {
+		let left = valley[i] - 1;
+		let right = valley[i] + 1;
+		while (left >= 0 && scores[left] > scores[left + 1]) {
+			minRewards[left] = Math.max(minRewards[left + 1] + 1, minRewards[left]);
+			left--;
+		}
+		while (right < scores.length && scores[right] > scores[right - 1]) {
+			minRewards[right] = minRewards[right - 1] + 1;
+			right++;
+		}
+	}
+	return minRewards.reduce((acc, reward) => acc + reward, 0);
+}
+
+function isValley(i, scores) {
+	if (i === 0) {
+		return scores[i] < scores[i + 1];
+	} else if (i === scores.length - 1) {
+		return scores[i] < scores[i - 1];
+	} else {
+		return scores[i] < scores[i + 1] && scores[i] < scores[i - 1];
+	}
+}
