@@ -66,10 +66,8 @@ function staircaseTraversal(height, maxSteps) {
 	let waysToTop = new Array(height + 1).fill(0);
 	waysToTop[0] = 1;
 	for (let i = 1; i <= height; i++) {
-		for (let j = 1; j <= maxSteps; j++) {
-			if (i >= j) {
-				waysToTop[i] += waysToTop[i - j];
-			}
+		for (let j = 1; j <= maxSteps && i >= j; j++) {
+			waysToTop[i] += waysToTop[i - j];
 		}
 	}
 	return waysToTop[height];
