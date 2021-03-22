@@ -85,3 +85,28 @@ function buildReturnValue(array, indecies, maxSumIdx) {
 	}
 	return vals.reverse();
 }
+
+// Solution 3 O(n^2) time | O(n) space
+
+function maxSumIncreasingSubsequence(array) {
+	let maxSeq = array.map(val => val);
+	let max = new Array(array.length).fill(null);
+	let maxIdx = 0;
+	for (let i = 1; i < array.length; i++) {
+		for (let j = 0; j < i; j++) {
+				if (array[i] > array[j] && maxSeq[j] + array[i] > maxSeq[i]) {
+					maxSeq[i] = maxSeq[j] + array[i];
+					max[i] = j;
+				}
+		}
+		if (maxSeq[maxIdx] < maxSeq[i]) maxIdx = i;
+	}
+	let result = [];
+	let maxValue = maxSeq[maxIdx];
+	while (maxIdx !== null) {
+		result.push(array[maxIdx]);
+		maxIdx = max[maxIdx];
+	}
+	let reversedResult = result.reverse();
+	return [maxValue, reversedResult];
+}
