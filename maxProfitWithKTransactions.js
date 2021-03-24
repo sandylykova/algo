@@ -19,3 +19,19 @@ function maxProfitWithKTransactions(prices, k) {
 	return profit[k][prices.length - 1];
 }
 
+// Solution 2 O(n^2*k) time | O(nk) space
+
+function maxProfitWithKTransactions(prices, k) {
+	if (prices.length === 0 || prices.length === 1) return 0;
+	let dp = new Array(k + 1).fill(0).map(() => new Array(prices.length).fill(0));
+	for (let i = 1; i <= k; i++) {
+		for (let j = 1; j < prices.length; j++) {
+			let max = -Infinity;
+			for (let x = 0; x < j; x++) {
+				max = Math.max(max, -prices[x] + dp[i - 1][x]);
+			}
+			dp[i][j] = Math.max(dp[i][j - 1], max + prices[j]);
+		}
+	}
+	return dp[k][prices.length - 1];
+}
