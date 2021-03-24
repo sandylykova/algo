@@ -37,3 +37,27 @@ var findMode = function(root) {
   traverse(root);
   return maxFrequent[0];
 };
+
+// Solution 2 O(n) time | O(1) space
+
+var findMode = function(root) {
+  let count = 0;
+  let modes = [];
+  let prevNode = null;
+  let maxCount = -Infinity;
+  function inOrderTraversal(node) {
+      if (node === null) return;
+      inOrderTraversal(node.left);
+      count = node.val === prevNode ? count + 1 : 1;
+      prevNode = node.val;
+      if (count > maxCount) {
+          maxCount = count;
+          modes = [node.val];
+      } else if (count === maxCount) {
+          modes.push(node.val);
+      }
+      inOrderTraversal(node.right);
+  }
+  inOrderTraversal(root);
+  return modes;
+};
