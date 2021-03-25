@@ -13,7 +13,7 @@
 // Explanation:
 // Employee 1 has importance value 5, and he has two direct subordinates: employee 2 and employee 3. They both have importance value 3. So the total importance value of employee 1 is 5 + 3 + 3 = 11.
 
-// Solution 1
+// Solution 1 O(n) time | O(n) space
 
 var GetImportance = function(employees, id) {
   let importanceMap = new Map();
@@ -32,4 +32,22 @@ var GetImportance = function(employees, id) {
   }
   traverse(id);
   return total;
+};
+
+// Solution 2 (cleaner code) O(n) time | O(n) space
+
+var GetImportance = function(employees, id) {
+  let importanceMap = new Map();
+  for (let empl of employees) {
+      importanceMap.set(empl.id, empl);
+  }
+  function traverse(id) {
+      let sum = importanceMap.get(id).importance;
+      let subs = importanceMap.get(id).subordinates;
+      for (let i = 0; i < subs.length; i++) {
+          sum += traverse(subs[i]);
+      }
+      return sum;
+  }
+  return traverse(id);
 };
