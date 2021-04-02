@@ -51,8 +51,6 @@ var sumSubarrayMins = function(arr) {
       nextLess[i] = count;
       nL.push([arr[i], count]);
   }
-  // console.log(prevLess)
-  // console.log(nextLess)
   let result = 0;
   let mod = 1000000007;
   for (let i = 0; i < arr.length; i++) {
