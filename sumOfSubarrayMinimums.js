@@ -25,3 +25,38 @@ var sumSubarrayMins = function(arr) {
   }
   return sum % (Math.pow(10, 9) + 7);
 };
+
+// Solution 2 with monotonic stack
+
+var sumSubarrayMins = function(arr) {
+  let prevLess = [];
+  let nextLess = [];
+  let pL = [];
+  let nL = [];
+  for (let i = 0; i < arr.length; i++) {
+      let count = 1;
+      while (pL.length && pL[pL.length - 1][0] > arr[i]) {
+          let val = pL.pop();
+          count += val[1];
+      }
+      prevLess[i] = count;
+      pL.push([arr[i], count]);
+  }
+  for (let i = arr.length - 1; i >= 0; i--) {
+      let count = 1;
+      while (nL.length && nL[nL.length - 1][0] >= arr[i]) {
+          let val = nL.pop();
+          count += val[1];
+      }
+      nextLess[i] = count;
+      nL.push([arr[i], count]);
+  }
+  // console.log(prevLess)
+  // console.log(nextLess)
+  let result = 0;
+  let mod = 1000000007;
+  for (let i = 0; i < arr.length; i++) {
+      result += arr[i] * prevLess[i] * nextLess[i];
+  }
+  return result % mod;
+};
