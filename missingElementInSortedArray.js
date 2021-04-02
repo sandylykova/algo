@@ -24,3 +24,25 @@ var missingElement = function(nums, k) {
         if (found === k) return next - 1;
     }
 };
+
+// Solution 2 O(log(n)) time | O(1) space
+
+function numberOfMissingElements(i, nums) {
+  return nums[i] - nums[0] - i;
+}
+
+var missingElement = function(nums, k) {
+  let len = nums.length;
+  if (k > numberOfMissingElements(len - 1, nums)) return nums[len - 1] + k - numberOfMissingElements(len - 1, nums);
+  let left = 0;
+  let right = nums.length - 1;
+  while (left < right) {
+      let mid = Math.floor((right + left) / 2);
+      if (numberOfMissingElements(mid, nums) < k) {
+          left = mid + 1;
+      } else {
+          right = mid;
+      }
+  }
+  return nums[left - 1] + k - numberOfMissingElements(left - 1, nums);
+};
