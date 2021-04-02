@@ -27,6 +27,7 @@ var sumSubarrayMins = function(arr) {
 };
 
 // Solution 2 with monotonic stack
+// In monotonic stack smaller element "eats" previous bigger element (>= or > just in one case either left side smaller or right side smaller to handle duplicates).
 
 var sumSubarrayMins = function(arr) {
   let prevLess = [];
