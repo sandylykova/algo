@@ -12,18 +12,15 @@ function laptopRentals(times) {
 	}
 	start.sort((a, b) => a - b);
 	end.sort((a, b) => a - b);
-	let maxLaptops = 0;
 	let laptops = 0;
-	let j = 0, i = 0;
-	while (i < start.length) {
-		if (start[i] < end[j]) {
-			laptops++;
-			i++;
-		} else {
+	let endIdx = 0, startIdx = 0;
+	while (startIdx < start.length) {
+		if (start[startIdx] >= end[endIdx]) {
 			laptops--;
-			j++;
+			endIdx++;
 		}
-		maxLaptops = Math.max(maxLaptops, laptops);
+		laptops++;
+		startIdx++;
 	}
-  return maxLaptops;
+  return laptops;
 }
