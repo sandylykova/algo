@@ -28,3 +28,21 @@ function longestStringChain(strings) {
 	}
 	return chain.length === 1 ? [] : chain;
 }
+
+// Solution 2 with dp table but returned value is just max length
+
+var longestStrChain = function(words) {
+  words.sort((a, b) => a.length - b.length);
+  let dp = new Map();
+  let max = 0;
+  for (let word of words) {
+      let best = 0;
+      for (let i = 0; i < word.length; i++) {
+          let substr = word.slice(0, i) + word.slice(i + 1);
+          best = Math.max(dp.get(substr) + 1 || 1, best);
+      }
+      dp.set(word, best);
+      max = Math.max(max, best);
+  }
+  return max;
+};
