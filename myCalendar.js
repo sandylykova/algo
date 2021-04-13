@@ -33,3 +33,36 @@ MyCalendar.prototype.book = function(start, end) {
   this.booking.push([start, end]);
   return true;
 };
+
+// Solution 2 O(log(n)) time | O(n) space
+
+var MyCalendar = function() {
+  this.root = null;
+};
+
+MyCalendar.prototype.book = function(start, end) {
+  if (this.root === null) {
+      return this.root = new Node(start, end);
+  } else {
+      function traverse(start, end, root) {
+          if (root.start >= end) {
+              if (root.left) {
+                  return traverse(start, end, root.left);
+              } else {
+                  root.left = new Node(start, end);
+                  return true;
+              }
+          } else if (root.end <= start) {
+              if (root.right) {
+                  return traverse(start, end, root.right);
+              } else {
+                  root.right = new Node(start, end);
+                  return true;
+              }
+          } else {
+              return false;
+          }
+      }
+      return traverse(start, end, this.root);
+  }
+};
