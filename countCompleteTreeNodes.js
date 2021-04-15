@@ -7,6 +7,8 @@
 // Input: root = [1,2,3,4,5,6]
 // Output: 6
 
+// Solution 1 O(d^2) or O((log^2)n) time | O(d) space
+
 var countNodes = function(root) {
   if (!root) return 0;
   let leftDepth = getDepth(root, true);
