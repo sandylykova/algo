@@ -32,3 +32,26 @@ var leafSimilar = function(root1, root2) {
     }
     return true;
 };
+
+// Solution 2
+
+var leafSimilar = function(root1, root2) {
+  let stack1 = [root1];
+  let stack2 = [root2];
+  while (stack1.length && stack2.length) {
+      let val1 = dfs(stack1);
+      let val2 = dfs(stack2);
+      if (val1 !== val2) return false;
+  }
+  function dfs(stack) {
+      while (true) {
+          let node = stack.pop();
+          if (node.left) stack.push(node.left);
+          if (node.right) stack.push(node.right);
+          if (node.left === null && node.right === null) {
+              return node.val;
+          }
+      }
+  }
+  return stack1.length === 0 && stack2.length === 0;
+};
