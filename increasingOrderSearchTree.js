@@ -27,3 +27,31 @@ var increasingBST = function(root) {
   inOrderTraversal(root);
   return newHead;
 };
+
+// Solution 2 iterative O(n) time | O(h) space
+
+var increasingBST = function(root) {
+  let newHead = null, newTree = null, stack = [];
+  while (root) {
+      while (root) {
+          stack.push(root);
+          root = root.left;
+      }
+      while (stack.length > 0) {
+          let node = stack.pop();
+          if (newHead === null) {
+              newHead = newTree = node;
+          } else {
+              newTree.right = node;
+              newTree = newTree.right;
+              node.left = null;
+          }
+          if (node.right) {
+              root = node.right;
+              break;
+          }
+
+      }
+  }
+  return newHead;
+};
