@@ -36,3 +36,18 @@ const swap = tree => {
   tree.left = tree.right;
   tree.right = left;
 };
+
+// Solution 3
+
+var invertTree = function(root) {
+  function traverse(node) {
+      if (node === null) return null;
+      let leftTree = traverse(node.left);
+      let rightTree = traverse(node.right);
+      node.left = rightTree;
+      node.right = leftTree;
+      return node;
+  }
+  traverse(root);
+  return root;
+};
