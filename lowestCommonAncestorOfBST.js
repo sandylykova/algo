@@ -41,4 +41,21 @@ var lowestCommonAncestor = function(root, p, q){
   }
 };
 
+// Solution 3 O(n) time | O(1) space
 
+var lowestCommonAncestor = function(root, p, q) {
+  let node = root;
+  let pVal = p.val;
+  let qVal = q.val;
+  while (node) {
+      let nodeVal = node.val;
+      if (nodeVal < pVal && nodeVal < qVal) {
+          node = node.right;
+      } else if (nodeVal > pVal && nodeVal > qVal) {
+          node = node.left;
+      } else {
+          return node;
+      }
+  }
+  return null;
+};
