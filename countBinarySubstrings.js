@@ -34,3 +34,20 @@ var countBinarySubstrings = function(s) {
 };
 
 // Solution 2 O(n) time | O(1) space
+
+var countBinarySubstrings = function(s) {
+  if (!s || !s.length) return 0;
+  let ans = 0;
+  let prev = 0;
+  let curr = 1;
+  for (let i = 1; i < s.length; i++) {
+      if (s[i - 1] === s[i]) {
+          curr++;
+      } else {
+          ans += Math.min(prev, curr);
+          prev = curr;
+          curr = 1;
+      }
+  }
+  return ans + Math.min(prev, curr);
+};
