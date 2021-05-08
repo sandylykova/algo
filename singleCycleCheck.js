@@ -21,3 +21,37 @@ function getNextIndex(array, currIndex) {
 	let nextIndex = (currIndex + jump) % array.length;
 	return nextIndex >= 0 ? nextIndex : nextIndex + array.length;
 }
+
+// Solution 2 O(n) time | O(n) space
+
+function hasSingleCycle(array) {
+	let graph = buildGraph(array);
+	let visited = new Set();
+	let stack = [0];
+	while (stack.length > 0) {
+		let curr = stack.pop();
+		stack.push(graph[curr]);
+		if (visited.has(curr)) {
+			if (curr === 0) return visited.size === array.length;
+			else return false;
+		}
+		visited.add(curr);
+	}
+	return true;
+}
+
+
+function buildGraph(array) {
+	let adjList = {};
+	let len = array.length;
+	for (let i = 0; i < array.length; i++) {
+		let step = array[i];
+		let value = i + step;
+		value = value % len;
+		if (value < 0) {
+			value += len;
+		}
+		adjList[i] = value;
+	}
+	return adjList;
+}
