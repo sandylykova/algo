@@ -40,7 +40,6 @@ function hasSingleCycle(array) {
 	return true;
 }
 
-
 function buildGraph(array) {
 	let adjList = {};
 	let len = array.length;
