@@ -47,3 +47,35 @@ function findRight(nums, target) {
   }
   return index;
 }
+
+// Solution 2 O(log(n)) time | O(1) space
+
+var searchRange = function(nums, target) {
+    let ans = [-1, -1];
+    if (nums.length === 0) return ans;
+    let leftSide = binarySearch(nums, target, true);
+    if (leftSide === -1) return ans;
+    let rightSide = binarySearch(nums, target, false);
+    return [leftSide, rightSide];
+};
+
+function binarySearch(nums, target, isLeft) {
+    let l = 0, r = nums.length - 1;
+    while (l <= r) {
+        let m = Math.floor((l + r) / 2);
+        if (nums[m] < target) {
+            l = m + 1;
+        } else if (nums[m] > target) {
+            r = m - 1;
+        } else {
+            if (isLeft) {
+                if (m === 0 || nums[m - 1] !== target) return m;
+                else r = m - 1;
+            } else {
+                if (m === nums.length - 1 || nums[m + 1] !== target) return m;
+                else l = m + 1;
+            }
+        }
+    }
+    return - 1;
+}
