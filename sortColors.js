@@ -42,20 +42,19 @@ var sortColors = function(nums) {
 // Solution 2 O(n) time | O(1) space
 
 var sortColors = function(nums) {
-  let red = 0, white = 0, blue = nums.length - 1;
-  while (white <= blue) {
-      if (nums[white] === 0) {
-          swap(red, white, nums);
-          white++;
-          red++;
-      } else if (nums[white] === 1) {
-          white++;
+  let idx = 0, left = 0, right = nums.length - 1;
+  while (left <= right) {
+      if (nums[left] === 0) {
+          swap(idx, left, nums);
+          left++;
+          idx++;
+      } else if (nums[left] === 1) {
+          left++;
       } else {
-          swap(white, blue, nums);
-          blue--;
+          swap(left, right, nums);
+          right--;
       }
   }
-  return nums;
 };
 
 function swap(i, j, arr) {
