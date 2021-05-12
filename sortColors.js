@@ -38,3 +38,26 @@ var sortColors = function(nums) {
   }
   return nums;
 };
+
+// Solution 2 O(n) time | O(1) space
+
+var sortColors = function(nums) {
+  let red = 0, white = 0, blue = nums.length - 1;
+  while (white <= blue) {
+      if (nums[white] === 0) {
+          swap(red, white, nums);
+          white++;
+          red++;
+      } else if (nums[white] === 1) {
+          white++;
+      } else {
+          swap(white, blue, nums);
+          blue--;
+      }
+  }
+  return nums;
+};
+
+function swap(i, j, arr) {
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+}
