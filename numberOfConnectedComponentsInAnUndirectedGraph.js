@@ -44,4 +44,38 @@ var countComponents = function(n, edges) {
   return number + 1;
 };
 
+// Solution 2 with DFS O(e + n) time | O(e + n) space, where e is the number of edges and n is the number of nodes in the graph
 
+var countComponents = function(n, edges) {
+    if (edges.length === 0) return n;
+    let visited = new Set();
+    let graph = buildGraph(edges);
+    let counter = 0;
+    for (let i = 0; i < n; i++) {
+        if (visited.has(i)) continue;
+        counter++;
+        dfs(i);
+    }
+    function dfs(node) {
+        visited.add(node);
+        let neighbors = graph.get(node);
+        if (neighbors) {
+            for (let neighbor of neighbors) {
+                if (visited.has(neighbor)) continue;
+                dfs(neighbor);
+            }
+        }
+    }
+    return counter;
+};
+
+function buildGraph(edges) {
+    let map = new Map();
+    for (let edge of edges) {
+        if (!map.has(edge[0])) map.set(edge[0], []);
+        if (!map.has(edge[1])) map.set(edge[1], []);
+        map.get(edge[0]).push(edge[1]);
+        map.get(edge[1]).push(edge[0]);
+    }
+    return map;
+}
