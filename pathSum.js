@@ -14,7 +14,7 @@
 // 7    2      1
 // return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 
-// Solution 1 recursive
+// Solution 1 recursive O(n) time | O(n) space
 
 var hasPathSum = function(root, sum) {
   if (!root) return false;
@@ -32,4 +32,21 @@ var hasPathSum = function(root, sum) {
       if (results[i] === sum) return true;
   }
   return false;
+};
+
+// Solution 2 O(n) time | O(n) space
+
+var hasPathSum = function(root, sum) {
+    function traverse(node, currSum) {
+        if (!node) return false;
+        currSum += node.val;
+        if (!node.left && !node.right) {
+            if (currSum === sum) return true;
+            return false;
+        }
+        let left = traverse(node.left, currSum);
+        let right = traverse(node.right, currSum);
+        return left || right;
+    }
+    return traverse(root, 0);
 };
