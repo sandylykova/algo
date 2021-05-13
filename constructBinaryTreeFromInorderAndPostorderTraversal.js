@@ -17,7 +17,7 @@
 //     /  \
 //    15   7
 
-// Solution 1
+// Solution 1 with modification of postorder
 
 var buildTree = function(inorder, postorder) {
   let hash = {};
@@ -31,4 +31,24 @@ var buildTree = function(inorder, postorder) {
       return root;
   }
   return traverse(0, inorder.length - 1);
+};
+
+// Solution 2 without modification of postorder
+
+var buildTree = function(inorder, postorder) {
+  let indeciesInorder = new Map();
+  for (let i = 0; i < inorder.length; i++) {
+      indeciesInorder.set(inorder[i], i);
+  }
+  let rootIdx = postorder.length - 1;
+  function traverse(start, end) {
+      if (rootIdx < 0 || start > end) return null;
+      let val = postorder[rootIdx--];
+      let root = new TreeNode(val);
+      let idxInInorder = indeciesInorder.get(val);
+      root.right = traverse(idxInInorder + 1, end);
+      root.left = traverse(start, idxInInorder - 1);
+      return root;
+  }
+  return traverse(0, postorder.length - 1);
 };
