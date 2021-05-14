@@ -42,3 +42,36 @@ var canFinish = function(numCourses, prerequisites) {
   }
   return true;
 };
+
+// Solution 2 DFS O(n) time | O(n) space
+
+var canFinish = function(numCourses, prerequisites) {
+    let graph = buildGraph(prerequisites);
+    let visited = new Set();
+    let visiting = new Set();
+    for (let i = 0; i < numCourses; i++) {
+        if (dfs(i)) return false;
+    }
+    function dfs(current) {
+        if (visited.has(current)) return false;
+        if (visiting.has(current)) return true;
+        visiting.add(current);
+        let neighbors = graph.get(current);
+        for (let i = 0; neighbors && i < neighbors.length; i++) {
+            if (dfs(neighbors[i])) return true;
+        }
+        visiting.delete(current);
+        visited.add(current);
+        return false;
+    }
+    return true;
+};
+
+function buildGraph(prerequisites) {
+    let map = new Map();
+    for (let [course, prerequisite] of prerequisites) {
+        if (!map.has(course)) map.set(course, []);
+        map.get(course).push(prerequisite);
+    }
+    return map;
+}
