@@ -12,7 +12,7 @@
 
 // Initially, all next pointers are set to NULL.
 
-// Solution O(n) time | O(1) space
+// Solution 1 O(n) time | O(1) space
 
 var connect = function(root) {
   if (!root) return root;
@@ -63,5 +63,23 @@ var connect = function(root) {
 
     }
 
+    return root;
+};
+
+// Solution 3 O(n) time | O(1) space
+
+var connect = function(root) {
+    if (!root) return root;
+    let leftmost = root;
+    let curr = root;
+    while (leftmost.left) {
+        curr = leftmost;
+        while (curr) {
+            curr.left.next = curr.right;
+            if (curr.next) curr.right.next = curr.next.left;
+            curr = curr.next;
+        }
+        leftmost = leftmost.left;
+    }
     return root;
 };
