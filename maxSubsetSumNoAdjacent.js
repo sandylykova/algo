@@ -22,12 +22,12 @@ function maxSubsetSumNoAdjacent(array) {
 function maxSubsetSumNoAdjacent(array) {
 	if (array.length === 0) return 0;
 	if (array.length === 1) return array[0];
-  let first = Math.max(array[0], array[1]);
-	let second = array[0];
+	let twoStepsAhead = array[0];
+	let oneStepAhead = Math.max(array[0], array[1]);
 	for (let i = 2; i < array.length; i++) {
-		let current = Math.max(first, second + array[i]);
-		second = first;
-		first = current;
+		let current = Math.max(twoStepsAhead + array[i], oneStepAhead);
+		twoStepsAhead = oneStepAhead;
+		oneStepAhead = current;
 	}
-	return first;
+	return oneStepAhead;
 }
