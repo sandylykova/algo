@@ -33,3 +33,40 @@ function mergeSort(arr) {
   let right = mergeSort(arr.slice(mid));
   return merge(left, right);
 }
+
+// Solution 2 O(nlog(n)) time | O(n) space
+
+function mergeSort(array) {
+  return mergeSortHelper(0, array.length - 1, array);
+}
+function mergeSortHelper(start, end, nums) {
+    if (start === end) {
+        return [nums[start]];
+    } else if (start > end) {
+        return [];
+    }
+    let mid = Math.floor(start + (end - start) / 2);
+    let leftSide = mergeSortHelper(start, mid, nums);
+    let rightSide = mergeSortHelper(mid + 1, end, nums);
+    let l = 0;
+    let r = 0;
+    let merged = [];
+    while (l < leftSide.length && r < rightSide.length) {
+        if (leftSide[l] < rightSide[r]) {
+            merged.push(leftSide[l]);
+            l++;
+        } else {
+            merged.push(rightSide[r]);
+            r++;
+        }
+    }
+    while (l < leftSide.length) {
+        merged.push(leftSide[l]);
+        l++;
+    }
+    while (r < rightSide.length) {
+        merged.push(rightSide[r]);
+        r++;
+    }
+    return merged;
+}
