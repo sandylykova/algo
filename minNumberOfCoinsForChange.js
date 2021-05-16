@@ -14,3 +14,22 @@ function minNumberOfCoinsForChange(n, denoms) {
 	}
 	return arrayOfCoins[n] === Infinity ? -1 : arrayOfCoins[n];
 }
+
+// Solution 2 O(n*d) time | O(n*d) space
+
+function minNumberOfCoinsForChange(n, denoms) {
+	let dp = new Array(denoms.length + 1).fill(Infinity).map(() => new Array(n + 1).fill(Infinity));
+	dp[0][0] = 0;
+	for (let i = 1; i < dp.length; i++) {
+		let denom = denoms[i - 1];
+		for (let j = 0; j < dp[i].length; j++) {
+			if (j === 0) dp[i][j] = 0;
+			else if (j < denom) {
+				dp[i][j] = dp[i - 1][j];
+			} else {
+				dp[i][j] = Math.min(1 + dp[i][j - denom], dp[i - 1][j]);
+			}
+		}
+	}
+	return dp[denoms.length][n] === Infinity ? -1 : dp[denoms.length][n];
+}
