@@ -38,3 +38,32 @@ var findTargetSumWays = function(nums, target) {
   }
   return traverse(0, 0);
 };
+
+// Solution 1 O(l*n) | O(l*n) space, where n is the size of the input array, l is the range of sum possible
+
+var findTargetSumWays = function(nums, target) {
+  let sum = 0;
+  let zeroes = 0;
+  for (let num of nums) {
+      if (num === 0) zeroes++;
+      sum += num;
+  }
+  if ((target + sum) % 2 === 1 || target > sum) {
+      return 0;
+  }
+  let targetSum = (sum + target) / 2;
+  let dp = new Array(nums.length + 1).fill(0).map(() => new Array(targetSum + 1).fill(0));
+  dp[0][0] = 1;
+  for (let i = 1; i <= nums.length; i++) {
+      let num = nums[i - 1];
+      for (let j = 0; j <= targetSum; j++) {
+          if (j === 0) dp[i][j] = 1;
+          else if (j < num || num === 0) {
+              dp[i][j] = dp[i - 1][j];
+          } else {
+              dp[i][j] = dp[i - 1][j - num] + dp[i - 1][j];
+          }
+      }
+  }
+  return 2 ** zeroes * dp[nums.length][targetSum];
+};
