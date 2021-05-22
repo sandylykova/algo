@@ -46,3 +46,27 @@ const flattenDFS = (prev, cur) => {
   cur.child = null;
   return flattenDFS(tail, tempNext);
 };
+
+// Solution 3 in-place
+
+var flatten = function(head) {
+  let p = head;
+  while (p !== null) {
+      if (p.child === null) {
+          p = p.next;
+      } else {
+          let nextNode = p.next;
+          let child = p.child;
+          while (child.next) {
+              child = child.next;
+          }
+          child.next = nextNode;
+          if (nextNode) nextNode.prev = child;
+          p.next = p.child;
+          p.child.prev = p;
+          p.child = null;
+      }
+
+  }
+  return head;
+};
