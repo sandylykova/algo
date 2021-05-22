@@ -6,15 +6,16 @@
 // Output: 1->3->5->2->4->NULL
 
 var oddEvenList = function(head) {
-  let odd = head;
-  let even = head.next;
-  let evenHead = even;
-  while (even !== null && even.next !== null) {
-    odd.next = even.next;
-    odd = odd.next;
-    even.next = odd.next;
-    even = even.next;
+  if (head === null) return head;
+  let even = head;
+  let odd = head.next;
+  let oddHead = odd;
+  while (odd && odd.next) {
+      even.next = odd.next;
+      odd.next = odd.next.next;
+      even = even.next;
+      odd = odd.next;
   }
-  odd.next = evenHead;
+  even.next = oddHead;
   return head;
 };
