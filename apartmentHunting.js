@@ -1,7 +1,7 @@
 // AlgoExpert: Apartment Hunting
 // Difficulty: very hard
 
-// Solution 1 brute force O(n^3) time | O(m) space
+// Solution 1 brute force O(n^2*m) time | O(m) space, where r is the number of the reqs, n is the number of the blocks
 
 function apartmentHunting(blocks, reqs) {
   let steps = Infinity;
