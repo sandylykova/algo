@@ -36,3 +36,30 @@ function compareLeafTraversal(tree1, tree2) {
 	}
   return true;
 }
+
+// Solution 1 O(n + m) time | O(h1 + h2) space, where n is the number of nodes in the first tree, m is the number of nodes in the second tree, h1 is the height of the first tree, h2 is the height of the second tree
+
+function compareLeafTraversal(tree1, tree2) {
+	let tree1Stack = [tree1];
+	let tree2Stack = [tree2];
+	while (tree1Stack.length > 0 && tree2Stack.length > 0) {
+		let leaf1 = getNextLeaf(tree1Stack);
+		let leaf2 = getNextLeaf(tree2Stack);
+		if (leaf1.value !== leaf2.value) return false;
+	}
+	return tree1Stack.length === 0 && tree2Stack.length === 0;
+}
+
+function getNextLeaf(stack) {
+	let node = stack.pop();
+	while (!isLeaf(node)) {
+		if (node.right) stack.push(node.right);
+		if (node.left) stack.push(node.left);
+		node = stack.pop();
+	}
+	return node;
+}
+
+function isLeaf(node) {
+	return node.left === null && node.right === null;
+}
