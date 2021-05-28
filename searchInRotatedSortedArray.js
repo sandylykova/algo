@@ -35,3 +35,42 @@ var search = function(nums, target) {
   }
   return -1;
 };
+
+// Solution 2 cleaner binary search
+
+var search = function(nums, target) {
+    if (nums.length === 0) return -1;
+    let pivot = findPivot(nums);
+    if (nums[pivot] > target) return -1;
+    if (nums[pivot] === target) return pivot;
+    let left = 0, right = nums.length - 1;
+    if (target < nums[0]) left = pivot;
+    else if (pivot !== 0) right = pivot;
+    return binarySearch(left, right, nums, target);
+};
+
+function findPivot(arr) {
+    let l = 0, r = arr.length - 1;
+    if (arr[l] <= arr[r]) return 0;
+    while (l < r) {
+        let m = Math.floor((r + l) / 2);
+        if (arr[m] > arr[r]) l = m + 1;
+        else r = m;
+    }
+    return l;
+}
+
+function binarySearch(left, right, arr, target) {
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) {
+            return mid;
+        }
+        else if (arr[mid] > target) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return -1;
+}
