@@ -33,4 +33,18 @@ var findPeakElement = function(nums) {
       else left = mid + 1;
   }
   return -1;
-}
+};
+
+// Solution 3 with cleaner binary search
+
+var findPeakElement = function(nums) {
+  if (nums.length === 0) return -1;
+  if (nums.length === 1) return 0;
+  let l = 0, r = nums.length - 1;
+  while (l < r) {
+      let mid = Math.floor((l + r) / 2);
+      if (nums[mid] < nums[mid + 1]) l = mid + 1;
+      else r = mid;
+  }
+  return l;
+};
