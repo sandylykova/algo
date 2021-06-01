@@ -15,7 +15,7 @@ function heapSort(array) {
 function buildMaxHeap(array) {
 	let parentIdx = Math.floor((array.length - 2) / 2);
 	for (let currentIdx = parentIdx; currentIdx >= 0; currentIdx--) {
-		siftDown(currentIdx, array.length - 1, array)
+		siftDown(currentIdx, array.length - 1, array);
 	}
 
 }
