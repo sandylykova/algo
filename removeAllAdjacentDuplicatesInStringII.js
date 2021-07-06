@@ -72,3 +72,29 @@ var removeDuplicates = function(s, k) {
 
   return res;
 };
+
+// Solution 4 O(n) time | O(n) space
+
+var removeDuplicates = function(s, k) {
+    if (!s || k === 1 || !s.length) return '';
+    let letters = [];
+    let numbers = [];
+    for (let i = 0; i < s.length; i++) {
+        let current = s[i];
+        if (letters.length && letters[letters.length - 1] === current) {
+            numbers[numbers.length - 1] += 1;
+        } else {
+            numbers.push(1);
+            letters.push(current);
+        }
+        if (numbers[numbers.length - 1] === k) {
+            numbers.pop();
+            letters.pop();
+        }
+    }
+    let finalString = [];
+    for (let i = 0; i < numbers.length; i++) {
+        finalString.push(letters[i].repeat(numbers[i]));
+    }
+    return finalString.join('');
+};
