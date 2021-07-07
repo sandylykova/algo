@@ -8,6 +8,8 @@
 // If there does not exist more candies that can be crushed (ie. the board is stable), then return the current board.
 // You need to perform the above rules until the board becomes stable, then return the current board.
 
+// Solution 1 O((n*m)^2) time | O(1) space
+
 const candyCrush = function(board) {
   let done = true;
 
@@ -63,4 +65,74 @@ const candyCrush = function(board) {
   }
 
   return done ? board : candyCrush(board);
+};
+
+// Solution 1 O((n*m)^2) time | O(n*m) space
+
+var candyCrush = function(board) {
+    if (!board || !board.length) return board;
+    let copy = [];
+    let revisit = false;
+    for (let i = 0; i < board.length; i++) {
+        let row = [];
+        for (let j = 0; j < board[i].length; j++) {
+            row.push(false);
+        }
+        copy.push(row);
+    }
+
+    // check cols
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j <= board[i].length - 3; j++) {
+            if (board[i][j] !== 0) {
+                let first = board[i][j];
+                let second = board[i][j + 1];
+                let third = board[i][j + 2];
+                if (first === second && second === third) {
+                    copy[i][j] = true;
+                    copy[i][j + 1] = true;
+                    copy[i][j + 2] = true;
+                    revisit = true;
+                }
+            }
+        }
+    }
+
+    // check rows
+    for (let i = 0; i <= board.length - 3; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (board[i][j] !== 0) {
+                let first = board[i][j];
+                let second = board[i + 1][j];
+                let third = board[i + 2][j];
+                if (first === second && second === third) {
+                    copy[i][j] = true;
+                    copy[i + 1][j] = true;
+                    copy[i + 2][j] = true;
+                    revisit = true;
+                }
+            }
+        }
+    }
+
+    // change for zeroes
+    for (let i = 0; i < board.length ; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (copy[i][j] === true) {
+                board[i][j] = 0;
+            }
+        }
+    }
+
+    // crash zeroes
+    for (let i = board[0].length - 1; i >= 0; i--) {
+        let zeroIdx = board.length - 1;
+        for (let j = board.length - 1; j >= 0; j--) {
+            if (board[j][i] !== 0) {
+                [board[zeroIdx][i], board[j][i]] = [board[j][i], board[zeroIdx][i]];
+                zeroIdx--;
+            }
+        }
+    }
+    return revisit === false ? board : candyCrush(board);
 };
