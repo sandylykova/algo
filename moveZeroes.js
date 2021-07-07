@@ -35,3 +35,16 @@ var moveZeroes2 = function(nums) {
   }
   return nums;
 };
+
+// Solution 3 O(n) time | O(1) space
+
+var moveZeroes = function(nums) {
+    let zeroIdx = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            [nums[i], nums[zeroIdx]] = [nums[zeroIdx], nums[i]];
+            zeroIdx++;
+        }
+    }
+    return nums;
+};
