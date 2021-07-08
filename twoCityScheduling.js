@@ -15,7 +15,7 @@
 // Input: costs = [[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]]
 // Output: 1859
 
-// O(nlog(n)) time | O(1) space
+// Solution 1 O(nlog(n)) time | O(1) space
 
 var twoCitySchedCost = function(costs) {
   costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
@@ -29,4 +29,23 @@ var twoCitySchedCost = function(costs) {
       minCostB+=costs[i][1];
   }
   return minCostA + minCostB;
+};
+
+// Solution 2 O(nlog(n)) time | O(1) space
+
+var twoCitySchedCost = function(costs) {
+  if (!costs || costs.length === 0) return 0;
+  // sorting
+  // O(nlog(n))
+  costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]));
+  let minSum = 0;
+  // O(n)
+  for (let i = 0; i < costs.length; i++) {
+      if (i < costs.length / 2) {
+        minSum += costs[i][0];
+      } else {
+        minSum += costs[i][1];
+      }
+  }
+  return minSum;
 };
