@@ -40,3 +40,48 @@ var invalidTransactions = function(transactions) {
   }
   return Array.from(invalidTransactionsSet);
 };
+
+// Solution 2
+
+var invalidTransactions = function(transactions) {
+  let map = new Map();
+  let invalid = [];
+  for (let i = 0; i < transactions.length; i++) {
+      let transaction = transactions[i];
+      let [name, time, amount, city] = transaction.split(',');
+      let numberAmount = Number(amount);
+      let numberTime = Number(time);
+      let object = {name, time: numberTime, amount: numberAmount, city, wholeStr: transaction, idx: i};
+      if (!map.has(name)) map.set(name, []);
+      let value = map.get(name);
+      value.push(object);
+  }
+  let idxSet = new Set();
+  for (let [key, value] of map) {
+      for (let i = 0; i < value.length; i++) {
+          let prev = value[i];
+          if (prev.amount > 1000 && !idxSet.has(prev.idx)) {
+              invalid.push(prev.wholeStr);
+              idxSet.add(prev.idx);
+          }
+          for (let j = i + 1; j < value.length; j++) {
+              let current = value[j];
+              if (current.amount > 1000 && !idxSet.has(current.idx)) {
+              invalid.push(current.wholeStr);
+              idxSet.add(current.idx);
+          }
+              if (prev.city !== current.city && Math.abs(current.time - prev.time) <= 60) {
+                  if (!idxSet.has(prev.idx)) {
+                      invalid.push(prev.wholeStr);
+                      idxSet.add(prev.idx);
+                  }
+                  if (!idxSet.has(current.idx)) {
+                      invalid.push(current.wholeStr);
+                      idxSet.add(current.idx);
+                  }
+              }
+          }
+      }
+  }
+  return invalid;
+};
