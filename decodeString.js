@@ -74,3 +74,29 @@ var decodeString = function(s) {
   }
   return stack.join('');
 };
+
+// Solution 3
+
+var decodeString = function(s) {
+  if (!s || !s.length) return '';
+  let stack = [];
+  for (let i = 0; i < s.length; i++) {
+      if (s[i] === ']') {
+          let strArr = [];
+          while (stack.length && stack[stack.length - 1] !== '[') {
+              strArr.push(stack.pop());
+          }
+          stack.pop();
+          let number = [];
+          while (stack.length && stack[stack.length - 1] >= 0 && stack[stack.length - 1] <= 9) {
+              number.push(stack.pop());
+          }
+          let num = number.reverse().join('');
+          let str = strArr.reverse().join('');
+          stack.push(str.repeat(num));
+      } else {
+          stack.push(s[i]);
+      }
+  }
+  return stack.join('');
+};

@@ -29,3 +29,21 @@ function diameterOfBinaryTree(root) {
    maxDepth(root);
    return max;
 }
+
+// Solution 2
+
+var diameterOfBinaryTree = function(root) {
+  if (!root) return 0;
+  let leftH = heightOfBinaryTree(root.left);
+  let rightH = heightOfBinaryTree(root.right);
+  let diameterL = diameterOfBinaryTree(root.left);
+  let diameterR = diameterOfBinaryTree(root.right);
+  return Math.max(leftH + rightH, Math.max(diameterL, diameterR));
+};
+
+function heightOfBinaryTree(root) {
+  if (!root) return 0;
+  let leftH = heightOfBinaryTree(root.left);
+  let rightH = heightOfBinaryTree(root.right);
+  return Math.max(leftH, rightH) + 1;
+}
