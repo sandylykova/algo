@@ -20,8 +20,8 @@
 
 var wordBreak = function(s, wordDict) {
   const memo = new Map();
-  return wordBreakHelper(s, wordDict, memo)
-}
+  return wordBreakHelper(s, wordDict, memo);
+};
 const wordBreakHelper = (s, wordDict, memo) => {
   if (memo.has(s)) {
       return memo.get(s);
@@ -43,4 +43,27 @@ const wordBreakHelper = (s, wordDict, memo) => {
   }
   memo.set(s, result);
   return result;
+};
+
+// Solution 2
+
+var wordBreak = function(s, wordDict) {
+    let result = [];
+    function recursive(curr, remaining) {
+        if (remaining.length === 0) {
+            let strCurr = curr.join(' ');
+            result.push(strCurr);
+            return;
+        }
+        for (let word of wordDict) {
+            if (remaining.startsWith(word)) {
+                let newCurr = curr.concat(word);
+                let newRemaining = remaining.slice(word.length);
+                recursive(newCurr, newRemaining);
+            }
+        }
+
+    }
+    recursive([], s);
+    return result;
 };
