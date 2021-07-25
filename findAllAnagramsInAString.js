@@ -65,3 +65,39 @@ var findAnagrams = function(s, p) {
   }
   return result;
 };
+
+// Solution 3 (same as 2 but using Map)
+
+var findAnagrams = function(s, p) {
+    if (!s.length || !p.length || s.length < p.length) return [];
+    let map = new Map();
+    let unique = 0;
+    for (let char of p) {
+        if (!map.has(char)) {
+            map.set(char, 1);
+            unique += 1;
+        } else {
+            map.set(char, map.get(char) + 1);
+        }
+    }
+    let result = [];
+    let len = p.length;
+    let start = 0;
+    for (let i = 0; i < s.length; i++) {
+        if (map.has(s[i])) {
+            map.set(s[i], map.get(s[i]) - 1);
+            if (map.get(s[i]) === 0) unique--;
+        }
+        while (unique === 0) {
+            if (i - start + 1 === len) {
+                result.push(start);
+            }
+            if (map.has(s[start])) {
+                map.set(s[start], map.get(s[start]) + 1);
+                if (map.get(s[start]) > 0) unique++;
+            }
+            start++;
+        }
+    }
+    return result;
+};
