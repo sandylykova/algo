@@ -38,3 +38,34 @@ var diffWaysToCompute = function(expression) {
   if (result.length === 0) result.push(Number(expression));
   return result;
 };
+
+// Solution 2 with memoization
+
+let map = new Map();
+var diffWaysToCompute = function(expression) {
+    if (map.has(expression)) return map.get(expression);
+    let result = [];
+    for (let i = 0; i < expression.length; i++) {
+        let char = expression[i];
+        if (char === '+' || char === '*' || char === '-') {
+            let a = expression.slice(0, i);
+            let b = expression.slice(i + 1);
+            let valsA = diffWaysToCompute(a);
+            let valsB = diffWaysToCompute(b);
+            for (let val1 of valsA) {
+                for (let val2 of valsB) {
+                    if (char === '+') {
+                        result.push(val1 + val2);
+                    } else if (char === '*') {
+                        result.push(val1 * val2);
+                    } else {
+                        result.push(val1 - val2);
+                    }
+                }
+            }
+        }
+    }
+    if (result.length === 0) result.push(Number(expression));
+    map.set(expression, result);
+    return result;
+};
