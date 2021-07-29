@@ -48,3 +48,23 @@ const twoSumSmaller = (i, target, nums) => {
   return count;
 };
 
+// Solution 2 O(n^2) time | O(1) space
+
+var threeSumSmaller = function(nums, target) {
+  let count = 0;
+  if (nums.length < 3) return count;
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < nums.length; i++) {
+      let left = i + 1;
+      let right = nums.length - 1;
+      while (left < right) {
+          if (nums[i] + nums[left] + nums[right] < target) {
+              count += right - left;
+              left++;
+          } else {
+              right--;
+          }
+      }
+  }
+  return count;
+};
