@@ -31,3 +31,17 @@ var subsets = function(nums) {
   backtrack(0, []);
   return result;
 };
+
+// Solution 2 iterative O(2^n * n) time | O(2^n * n) space
+
+var subsets = function(nums) {
+  let result = [[]];
+  for (let num of nums) {
+      let len = result.length;
+      for (let i = 0; i < len; i++) {
+          let currentSubset = result[i];
+          result.push(currentSubset.concat(num));
+      }
+  }
+  return result;
+};
