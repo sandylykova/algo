@@ -8,26 +8,25 @@
 // Input: s = "leetcode", wordDict = ["leet", "code"]
 // Output: true
 
-// Solution 1 O(n^2) time | O(n) space
+// Solution 1 O(n^3) time | O(n) space
 
 var wordBreak = function(s, wordDict) {
-  let dictionary = new Set(wordDict);
-  let queue = [0];
-  let visited = new Set();
-  while (queue.length > 0) {
-      let currIdx = queue.shift();
-      if (!visited.has(currIdx)) {
-          for (let i = currIdx; i < s.length; i++) {
-              let substring = s.slice(currIdx, i + 1);
-              if (dictionary.has(substring)) {
-                  if (i === s.length - 1) {
-                  return true;
-                  }
-                  queue.push(i + 1);
-              }
-          }
-      }
-      visited.add(currIdx);
-  }
-  return false;
+    // O(m) space, m - the length of wordDict
+    let dictionary = new Set(wordDict);
+    let q = [0];
+    // O(n) space, n - the length of s
+    let visited = new Set();
+    // O(n^3) time
+    while (q.length > 0) {
+        let idx = q.shift();
+        if (idx === s.length) return true;
+        if (!visited.has(idx)) {
+            for (let i = idx; i < s.length; i++) {
+                let substr = s.slice(idx, i + 1);
+                if (dictionary.has(substr)) q.push(i + 1);
+            }
+            visited.add(idx);
+        }
+    }
+    return false;
 };
