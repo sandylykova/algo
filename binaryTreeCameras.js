@@ -36,3 +36,27 @@ var minCameraCover = function(root) {
   if (traverse(root) === 'notMonitored') camera++;
   return camera;
 };
+
+// Solution 2 O(n) time | O(n) space
+
+var minCameraCover = function(root) {
+  if (!root) return 0;
+  let camera = 0;
+  let covered = new Set();
+  covered.add(null);
+  function traverse(node, parent) {
+      if (node) {
+          traverse(node.left, node);
+          traverse(node.right, node);
+          if ((parent === null && !covered.has(node)) || !covered.has(node.left) || !covered.has(node.right)) {
+              camera += 1;
+              covered.add(node);
+              covered.add(parent);
+              covered.add(node.left);
+              covered.add(node.right);
+          }
+      }
+  }
+  traverse(root, null);
+  return camera;
+};
