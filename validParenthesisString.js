@@ -33,7 +33,6 @@ var checkValidString = function(s) {
   }
   if (stack.length === 0) return true;
   else {
-      let i = 0;
       if (asterics.length < stack.length) return false;
       for (let [char, idx] of stack) {
           let found = false;
@@ -47,6 +46,24 @@ var checkValidString = function(s) {
           }
           if (!found) return false;
       }
+  }
+  return true;
+};
+
+// Solution 2 O(n) time | O(1) space
+
+var checkValidString = function(s) {
+  let open = 0, close = 0;
+  for (let i = 0; i < s.length; i++) {
+      if (s[i] === '(' || s[i] === '*') open++;
+      else open--;
+      if (open < 0) return false;
+  }
+  if (open === 0) return true;
+  for (let i = s.length - 1; i > -1; i--) {
+      if (s[i] === ')' || s[i] === '*') close++;
+      else close--;
+      if (close < 0) return false;
   }
   return true;
 };
